@@ -6,7 +6,7 @@ using UnityEngine;
 public class CarEngine : MonoBehaviour
 {
     public Transform path;
-    
+
     public WheelCollider wheelFL;
     public WheelCollider wheelFR;
     public WheelCollider wheelBL;
@@ -16,14 +16,13 @@ public class CarEngine : MonoBehaviour
     public float maxSpeed = 100f;
     public float maxStearingAngle = 45f;
     public float maxWheelTorque = 80f;
-    public float maxBreakTorque = 150f;
+    public float maxBreakTorque = 100f;
 
-    public bool isBraking = false;
+    public bool isBraking;
 
     public CarSpawner spawner;
     public int pathNumber;
     public List<Transform> nodes;
-
 
     private int currentNode = 0;
 
@@ -34,7 +33,6 @@ public class CarEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         //find the vector pointing from our position to the target
         var _direction = (nodes[1].position - transform.position).normalized;
 
@@ -43,6 +41,8 @@ public class CarEngine : MonoBehaviour
 
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 300f);
+        maxWheelTorque = 80f;
+        maxBreakTorque = 200f;
     }
 
     // Update is called once per frame
@@ -73,23 +73,26 @@ public class CarEngine : MonoBehaviour
         var raycast = Physics.Raycast(redLightChecker, out hit);
         if (raycast)
         {
-            Debug.Log(hit.distance);
-            if (hit.distance < 10f)
+            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
+            Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
+            if(hit.distance < 2f)
             {
-                hit.collider.GetComponent<Renderer>().material.color = Color.green;
+                isBraking = true;
+            }
+            else if (hit.distance < distanceToMeasure)
+            {
                 isBraking = true;
             }
             else
             {
                 isBraking = false;
             }
-            
         }
     }
 
     private void ApplyStear()
     {
-        
+
         Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNode].position);
         float newSteer = (relativeVector.x / relativeVector.magnitude) * maxStearingAngle;
 
@@ -100,7 +103,7 @@ public class CarEngine : MonoBehaviour
     private void Drive()
     {
         currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 1000;
-        if(!isBraking && currentSpeed < maxSpeed)
+        if (currentSpeed < maxSpeed)
         {
             wheelFL.motorTorque = maxWheelTorque;
             wheelFR.motorTorque = maxWheelTorque;
@@ -114,7 +117,7 @@ public class CarEngine : MonoBehaviour
 
     private void CheckWaypointDistance()
     {
-        if(Vector3.Distance(transform.position ,nodes[currentNode].position) < 1.5f)
+        if (Vector3.Distance(transform.position, nodes[currentNode].position) < 1.5f)
         {
             currentNode++;
         }
