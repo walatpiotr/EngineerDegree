@@ -34,13 +34,16 @@ public class CarEngine : MonoBehaviour
     void Start()
     {
         //find the vector pointing from our position to the target
-        var _direction = (nodes[1].position - transform.position).normalized;
+        var _direction = (nodes[1].position).normalized;
+        _direction.x = -(2 * _direction.x);
+        _direction.z = -(2 * _direction.z);
 
         //create the rotation we need to be in to look at the target
         var _lookRotation = Quaternion.LookRotation(_direction);
 
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 300f);
+       
         maxWheelTorque = 80f;
         maxBreakTorque = 200f;
     }
@@ -64,22 +67,21 @@ public class CarEngine : MonoBehaviour
         //properties of ray setup (to avoid self and ground detecting)
         Vector3 destinationOfRay = transform.forward;
         destinationOfRay.y = 0.1f;
-        //Vector3 startingOfRay = transform.position;
-        //startingOfRay.x = -1.0f;
+        var positieVoor = transform.position + transform.forward;
 
-        Debug.DrawRay(transform.position, destinationOfRay * 10f, Color.green);
-        Ray redLightChecker = new Ray(transform.position, destinationOfRay);
+        Debug.DrawRay(positieVoor, destinationOfRay, Color.green);
+        Ray redLightChecker = new Ray(positieVoor, destinationOfRay);
 
         var raycast = Physics.Raycast(redLightChecker, out hit);
         if (raycast)
         {
             var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
             Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
-            if(hit.distance < 2f)
+            if((hit.distance < 3f) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
             {
                 isBraking = true;
             }
-            else if (hit.distance < distanceToMeasure)
+            else if ((hit.distance < distanceToMeasure) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
             {
                 isBraking = true;
             }

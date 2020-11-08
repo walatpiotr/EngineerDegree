@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +7,7 @@ public class CarSpawner : MonoBehaviour
 {
     public float percentageOfBigCars;
     public GameObject smallCar;
+    public GameObject bigCar;
     public List<GameObject> paths;
     public float spawnTime = 3.0f;
 
@@ -19,24 +19,12 @@ public class CarSpawner : MonoBehaviour
     void Start()
     {
         int i = 0;
-        /*foreach (GameObject path in paths)
+        foreach (GameObject path in paths)
         {
             carsInPaths.Add(i, new List<GameObject> { });
             i++;
-        }*/
-        //StartCoroutine(SpawnSetup());
-
-
-
-
-        //temp for one car
-        carsInPaths.Add(i, new List<GameObject> { });
-        var nodes = GetCertainPath(i);
-        GameObject car = Instantiate(smallCar) as GameObject;
-        var component = car.GetComponent<CarEngine>();
-        CarAddAndSetup(component, nodes, car);
-
-        
+        }
+        StartCoroutine(SpawnSetup());
     }
 
     private IEnumerator SpawnSetup()
@@ -48,7 +36,7 @@ public class CarSpawner : MonoBehaviour
             {
                 yield return new WaitForSeconds(spawnTime);
                 var nodes = GetCertainPath(i);
-                GameObject car = Instantiate(smallCar) as GameObject;
+                GameObject car = ChooseCarType();
                 var component = car.GetComponent<CarEngine>();
                 CarAddAndSetup(component, nodes, car);
                 i++;
@@ -58,7 +46,7 @@ public class CarSpawner : MonoBehaviour
 
     private void Spawn()
     {
-        GameObject car = Instantiate(smallCar) as GameObject;
+        GameObject car = ChooseCarType();
         var component = car.GetComponent<CarEngine>();
 
         var nodes = GetRandomPath();
@@ -163,5 +151,19 @@ public class CarSpawner : MonoBehaviour
 
         //Adding car to path list of cars
         carsInPaths[thisNumber].Add(car);
+    }
+
+    private GameObject ChooseCarType()
+    {
+        GameObject car;
+        var randomInt = Random.Range(0, 100);
+        if(randomInt < percentageOfBigCars)
+        {
+            car = Instantiate(bigCar) as GameObject;
+        }
+        else{
+            car = Instantiate(smallCar) as GameObject;
+        }
+        return car;
     }
 }
