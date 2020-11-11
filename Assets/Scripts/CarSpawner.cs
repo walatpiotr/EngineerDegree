@@ -9,8 +9,7 @@ public class CarSpawner : MonoBehaviour
     public GameObject smallCar;
     public GameObject bigCar;
     public List<GameObject> paths;
-    public float spawnTime = 3.0f;
-
+    public float spawnTime = 1.0f;
     public Dictionary<int, List<GameObject>> carsInPaths = new Dictionary<int, List<GameObject>> { };
     public Dictionary<int, List<GameObject>> nodesInPaths = new Dictionary<int, List<GameObject>> { };
 
@@ -40,6 +39,10 @@ public class CarSpawner : MonoBehaviour
                 var component = car.GetComponent<CarEngine>();
                 CarAddAndSetup(component, nodes, car);
                 i++;
+                if (i > paths.Count)
+                {
+                    break;
+                }
             }
         }
     }
@@ -132,25 +135,46 @@ public class CarSpawner : MonoBehaviour
 
     private void CarAddAndSetup(CarEngine component, List<Transform> nodes, GameObject car)
     {
-        //Adding spawner object to car and number of path and list of nodes in path - deleting object need those properties
-        component.spawner = this;
-        component.pathNumber = thisNumber;
-        component.nodes = nodes;
+        if (CheckCarsPositions(nodes.First().position))
+        {
+            //Upping first node and a car a little bit when spawn
+            var node = nodes.First().position;
+            node.y = 0.2f;
+            car.transform.position = node;
 
-        //Upping first node and a car a little bit when spawn
-        var node = nodes.First().position;
-        node.y = 0.2f;
-        car.transform.position = node;
+            //Rotate toward second node in path
+            Vector3 toward = nodes[1].position;
 
-        //Rotate toward second node in path
-        Vector3 toward = nodes[1].position;
+            Debug.DrawLine(car.transform.position, toward);
 
-        Debug.DrawLine(car.transform.position, toward);
+            car.transform.rotation = Quaternion.LookRotation(toward);
 
-        car.transform.rotation = Quaternion.LookRotation(toward);
+            //Adding spawner object to car and number of path and list of nodes in path - deleting object need those properties
+            component.spawner = this;
+            component.pathNumber = thisNumber;
+            component.nodes = nodes;
 
-        //Adding car to path list of cars
-        carsInPaths[thisNumber].Add(car);
+            //Adding car to path list of cars
+            carsInPaths[thisNumber].Add(car);
+            Instantiate(car);
+        }
+        else
+        {
+            Debug.Log("Could not spawn on path" + nodes.First().position);
+        }
+    }
+
+    private bool CheckCarsPositions(Vector3 position)
+    {
+        var cars = GameObject.FindGameObjectsWithTag("car");
+        foreach(GameObject car in cars)
+        {
+            if(Vector3.Distance(position, car.transform.position) < 2f)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private GameObject ChooseCarType()
@@ -159,10 +183,10 @@ public class CarSpawner : MonoBehaviour
         var randomInt = Random.Range(0, 100);
         if(randomInt < percentageOfBigCars)
         {
-            car = Instantiate(bigCar) as GameObject;
+            car = bigCar as GameObject;
         }
         else{
-            car = Instantiate(smallCar) as GameObject;
+            car = smallCar as GameObject;
         }
         return car;
     }

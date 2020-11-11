@@ -76,8 +76,8 @@ public class CarEngine : MonoBehaviour
         if (raycast)
         {
             var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
-            Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
-            if((hit.distance < 3f) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
+            //Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
+            if((hit.distance < 2f) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
             {
                 isBraking = true;
             }
