@@ -9,6 +9,16 @@ TagManager:
   - redlightwall1
   - redlightwall2
   - redlightwall3
+  - car1
+  - car2
+  - car3
+  - car4
+  - car5
+  - car6
+  - car7
+  - car8
+  - car9
+  - car10
   layers:
   - Default
   - TransparentFX

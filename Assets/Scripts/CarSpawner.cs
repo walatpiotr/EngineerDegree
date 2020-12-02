@@ -12,11 +12,16 @@ public class CarSpawner : MonoBehaviour
     public float spawnTime = 1.0f;
     public Dictionary<int, List<GameObject>> carsInPaths = new Dictionary<int, List<GameObject>> { };
     public Dictionary<int, List<GameObject>> nodesInPaths = new Dictionary<int, List<GameObject>> { };
+    public List<string> wallTags;
+    public List<string> carTags;
 
     private int thisNumber = 0;
+    
 
     void Start()
     {
+        wallTags = new List<string>() { "redlightwall3", "redlightwall2", "redlightwall1" };
+        carTags = new List<string>() { "car1", "car2", "car3", "car4", "car5", "car6", "car7", "car8", "car9", "car10" };
         int i = 0;
         foreach (GameObject path in paths)
         {
@@ -37,7 +42,7 @@ public class CarSpawner : MonoBehaviour
                 var nodes = GetCertainPath(i);
                 GameObject car = ChooseCarType();
                 var component = car.GetComponent<CarEngine>();
-                CarAddAndSetup(component, nodes, car);
+                CarAddAndSetup(component, nodes, car, i);
                 i++;
                 if (i > paths.Count)
                 {
@@ -56,7 +61,7 @@ public class CarSpawner : MonoBehaviour
 
         if (!carsInPaths[thisNumber].Any())
         {
-            CarAddAndSetup(component, nodes, car);
+            CarAddAndSetup(component, nodes, car, thisNumber);
         }
         else
         {
@@ -72,7 +77,7 @@ public class CarSpawner : MonoBehaviour
                         if ( distance > 100.0f)
                         {
                             flag = false;
-                            CarAddAndSetup(component, nodes, car);
+                            CarAddAndSetup(component, nodes, car, thisNumber);
                             break;
                         }
                         else
@@ -83,7 +88,7 @@ public class CarSpawner : MonoBehaviour
                 }
                 else
                 {
-                    CarAddAndSetup(component, nodes, car);
+                    CarAddAndSetup(component, nodes, car, thisNumber);
                 }
             }
         }
@@ -133,7 +138,7 @@ public class CarSpawner : MonoBehaviour
         return nodes;
     }
 
-    private void CarAddAndSetup(CarEngine component, List<Transform> nodes, GameObject car)
+    private void CarAddAndSetup(CarEngine component, List<Transform> nodes, GameObject car, int numberOfPath)
     {
         if (CheckCarsPositions(nodes.First().position))
         {
@@ -144,8 +149,22 @@ public class CarSpawner : MonoBehaviour
 
             //Adding spawner object to car and number of path and list of nodes in path - deleting object need those properties
             component.spawner = this;
-            component.pathNumber = thisNumber;
+            component.pathNumber = numberOfPath;
             component.nodes = nodes;
+            component.carTagToAvoid = carTags[numberOfPath];
+
+            if (numberOfPath < 4)
+            {
+                component.wallTagToAvoid = wallTags[0];
+            }
+            if (numberOfPath < 7 && numberOfPath > 3 )
+            {
+                component.wallTagToAvoid = wallTags[1];
+            }
+            if (6 < numberOfPath && numberOfPath < 9)
+            {
+                component.wallTagToAvoid = wallTags[2];
+            }
 
             //Adding car to path list of cars
             carsInPaths[thisNumber].Add(car);

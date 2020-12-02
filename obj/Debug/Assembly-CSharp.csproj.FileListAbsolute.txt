@@ -558,3 +558,7 @@ C:\Users\Piotrek\Documents\Walat_PI\EngineerDegree\obj\Debug\Assembly-CSharp.csp
 C:\Users\Piotrek\Documents\Walat_PI\EngineerDegree\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\Piotrek\Documents\Walat_PI\EngineerDegree\obj\Debug\Assembly-CSharp.dll
 C:\Users\Piotrek\Documents\Walat_PI\EngineerDegree\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Piotrek\Documents\EngineerDegree\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\Piotrek\Documents\EngineerDegree\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\Piotrek\Documents\EngineerDegree\obj\Debug\Assembly-CSharp.dll
+C:\Users\Piotrek\Documents\EngineerDegree\obj\Debug\Assembly-CSharp.pdb

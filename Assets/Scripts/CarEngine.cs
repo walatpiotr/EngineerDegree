@@ -23,6 +23,8 @@ public class CarEngine : MonoBehaviour
     public CarSpawner spawner;
     public int pathNumber;
     public List<Transform> nodes;
+    public string carTagToAvoid;
+    public string wallTagToAvoid;
 
     private int currentNode = 0;
 
@@ -36,6 +38,8 @@ public class CarEngine : MonoBehaviour
         //Rotate toward second node in path
         this.transform.LookAt(nodes[3].position);
 
+        this.tag = carTagToAvoid;
+        this.transform.Find("Body").tag = carTagToAvoid;
         maxWheelTorque = 80f;
         maxBreakTorque = 200f;
     }
@@ -69,11 +73,8 @@ public class CarEngine : MonoBehaviour
         {
             var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
             //Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
-            if((hit.distance < 2f) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
-            {
-                isBraking = true;
-            }
-            else if ((hit.distance < distanceToMeasure) && ((hit.collider.tag == "wall") || (hit.collider.tag == "car")))
+            if(((hit.distance < 2f) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))) 
+                || ((hit.distance < distanceToMeasure) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))))
             {
                 isBraking = true;
             }
