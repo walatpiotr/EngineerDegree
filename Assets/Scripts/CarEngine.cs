@@ -33,17 +33,9 @@ public class CarEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //find the vector pointing from our position to the target
-        var _direction = (nodes[1].position).normalized;
-        _direction.x = -(2 * _direction.x);
-        _direction.z = -(2 * _direction.z);
+        //Rotate toward second node in path
+        this.transform.LookAt(nodes[3].position);
 
-        //create the rotation we need to be in to look at the target
-        var _lookRotation = Quaternion.LookRotation(_direction);
-
-        //rotate us over time according to speed until we are in the required rotation
-        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 300f);
-       
         maxWheelTorque = 80f;
         maxBreakTorque = 200f;
     }

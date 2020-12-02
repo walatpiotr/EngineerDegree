@@ -142,13 +142,6 @@ public class CarSpawner : MonoBehaviour
             node.y = 0.2f;
             car.transform.position = node;
 
-            //Rotate toward second node in path
-            Vector3 toward = nodes[1].position;
-
-            Debug.DrawLine(car.transform.position, toward);
-
-            car.transform.rotation = Quaternion.LookRotation(toward);
-
             //Adding spawner object to car and number of path and list of nodes in path - deleting object need those properties
             component.spawner = this;
             component.pathNumber = thisNumber;

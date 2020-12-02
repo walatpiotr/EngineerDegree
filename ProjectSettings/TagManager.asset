@@ -6,6 +6,9 @@ TagManager:
   tags:
   - wall
   - car
+  - redlightwall1
+  - redlightwall2
+  - redlightwall3
   layers:
   - Default
   - TransparentFX

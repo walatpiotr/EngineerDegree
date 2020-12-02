@@ -1047,13 +1047,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313455224}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 3.3, y: 24.7, z: -37.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &315508014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2273,7 @@ GameObject:
   - component: {fileID: 698952058}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: wall
+  m_TagString: redlightwall1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5100,7 +5100,7 @@ GameObject:
   - component: {fileID: 1630836264}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: wall
+  m_TagString: redlightwall3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5737,7 +5737,7 @@ GameObject:
   - component: {fileID: 1849831050}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: wall
+  m_TagString: redlightwall2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
