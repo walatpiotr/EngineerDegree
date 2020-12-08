@@ -23,23 +23,24 @@ public class CarSpawner : MonoBehaviour
 
     public List<NamedImage> allCars;
 
-    public List<string> wallTags;
-    public List<string> carTags;
+    public List<string> wallTags = new List<string>() { "redlightwall3", "redlightwall2", "redlightwall1" };
+    public List<string> carTags = new List<string>() { "car1", "car2", "car3", "car4", "car5", "car6", "car7", "car8", "car9", "car10" };
 
     private bool canUpdate = false;
 
     void Start()
     {
         wallTags = new List<string>() { "redlightwall3", "redlightwall2", "redlightwall1" };
-        carTags = new List<string>() { "car1", "car2", "car3" };
+        carTags = new List<string>() { "car1", "car2", "car3", "car4", "car5", "car6", "car7", "car8", "car9", "car10" };
+
         int i = 0;
-        foreach (GameObject path in paths)
-        {
-            carsInPaths.Add(i, new List<GameObject> { });
-            i++;
-        }
-        StartCoroutine(SpawnSetup());
-        canUpdate = true;
+            foreach (GameObject path in paths)
+            {
+                carsInPaths.Add(i, new List<GameObject> { });
+                i++;
+            }
+            StartCoroutine(SpawnSetup());
+            canUpdate = true;
     }
 
     void Update()
@@ -106,22 +107,30 @@ public class CarSpawner : MonoBehaviour
             component.spawner = this;
             component.pathNumber = numberOfPath;
             component.nodes = nodes;
-            
+
+            if(numberOfPath == 6 || numberOfPath == 7)
+            {
+                Debug.Log(carTags[6] + ":" + carTags[7]);
+                component.carTagsToAvoid.Add(carTags[6]);
+                component.carTagsToAvoid.Add(carTags[7]);
+
+            }
+            else
+            {
+                component.carTagsToAvoid.Add(carTags[numberOfPath]);
+            }
 
             if (numberOfPath < 4)
             {
                 component.wallTagToAvoid = wallTags[0];
-                component.carTagToAvoid = carTags[0];
             }
-            if (numberOfPath < 8 && numberOfPath > 3 )
+            if (numberOfPath < 8 && numberOfPath > 3)
             {
                 component.wallTagToAvoid = wallTags[1];
-                component.carTagToAvoid = carTags[1];
             }
             if (7 < numberOfPath && numberOfPath < 10)
             {
                 component.wallTagToAvoid = wallTags[2];
-                component.carTagToAvoid = carTags[2];
             }
 
             //Adding car to path list of cars
@@ -136,46 +145,28 @@ public class CarSpawner : MonoBehaviour
 
     private bool CheckCarsPositions(Vector3 position, int numberOfPath)
     {
-        string carTag = "car";
+        List<string> tagOfCars = new List<string>();
 
-        if (numberOfPath < 4)
+        if(numberOfPath == 6 || numberOfPath == 7)
         {
-            carTag = "car1";
+            tagOfCars.Add(carTags[6]);
+            tagOfCars.Add(carTags[7]);
         }
-        if (numberOfPath < 8 && numberOfPath > 3)
+        else
         {
-            carTag = "car2";
-        }
-        if (7 < numberOfPath && numberOfPath < 10)
-        {
-            carTag = "car3";
+            tagOfCars.Add(carTags[numberOfPath]);
         }
 
-        var cars = GameObject.FindGameObjectsWithTag(carTag);
-        foreach(GameObject car in cars)
+        Collider[] colliders = Physics.OverlapSphere(position, 6.0f);
+
+        foreach (var collider in colliders)
         {
-            if(Vector3.Distance(position, car.transform.position) < 2f)
+            if (tagOfCars.Contains(collider.tag))
             {
                 return false;
             }
         }
         return true;
-
-        //================
-        /*
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 4.0f);
-
-        foreach (var collider in colliders)
-        {
-            if (collider.tag == tagOfCars)
-            {
-                tryingToEnable = true;
-            }
-        }
-        if (!tryingToEnable)
-        {
-            collider.enabled = true;
-        }*/
     }
 
     private GameObject ChooseCarType()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,11 +15,11 @@ public class LightTimer : MonoBehaviour
     public float delay;
 
     //manually
-    public int numberOfPath;
+    public List<int> numberOfPath;
     //
 
     public List<GameObject> carsInMyPath;
-    public string tagOfCars;
+    public List<string> tagsOfCars;
 
     private bool greenFlag = false;
     private bool yellowFlag = true;
@@ -30,14 +31,15 @@ public class LightTimer : MonoBehaviour
 
     private BoxCollider collider;
     private MeshRenderer renderer;
-    private CarSpawner carSpawner;
+    public CarSpawner carSpawner;
+    private LightsTimeParametrsHolder parent;
 
     private bool tryingToEnable = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        LightsTimeParametrsHolder parent = transform.parent.GetComponent<LightsTimeParametrsHolder>();
+        parent = transform.parent.GetComponent<LightsTimeParametrsHolder>();
 
         green = parent.GreenLightTime;
         yellow = parent.YellowLightTime;
@@ -47,28 +49,21 @@ public class LightTimer : MonoBehaviour
 
         red = yellow * 4 + green * 2 + tBlock * 2;
 
-        if (number == 1)
-        {
-            delay = parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime;
-            tagOfCars = "car1";
-        }
-        else if (number == 2)    
-        {
-            delay = 2 * (parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime);
-            tagOfCars = "car2";
-        }
-        else if (number == 3)
-        {
-            delay = 0f;
-            tagOfCars = "car3";
-        }
-
-        timer = delay;
+        TimerSetup();
 
         collider = this.GetComponent<BoxCollider>();
         renderer = this.GetComponent<MeshRenderer>();
-        GameObject spawner = GameObject.FindGameObjectWithTag("spawner");
-        carSpawner = spawner.GetComponent<CarSpawner>();
+        try
+        {
+            GameObject spawner = GameObject.FindGameObjectWithTag("spawner");
+            carSpawner = spawner.GetComponent<CarSpawner>();
+            TagsOfCarsSetup();
+        }
+        catch(Exception e)
+        {
+
+        }
+        
     }
 
     // Update is called once per frame
@@ -76,13 +71,50 @@ public class LightTimer : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
-        carsInMyPath = carSpawner.carsInPaths[numberOfPath];
+        CheckCarsInPaths();
 
         ChangeLights();
 
         if (tryingToEnable)
         {
             TryToEnableCollider(true);
+        }
+    }
+
+    void CheckCarsInPaths()
+    {
+        var carListTemp = new List<GameObject>();
+
+        foreach (var paths in numberOfPath)
+        {
+            carListTemp.AddRange(carSpawner.carsInPaths[paths]);
+        }
+        carsInMyPath = carListTemp;
+    }
+
+    void TimerSetup()
+    {
+        if (number == 1)
+        {
+            delay = parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime;
+        }
+        else if (number == 2)
+        {
+            delay = 2 * (parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime);
+        }
+        else if (number == 3)
+        {
+            delay = 0f;
+        }
+
+        timer = delay;
+    }
+
+    void TagsOfCarsSetup()
+    {
+        foreach(int number in numberOfPath)
+        {
+            tagsOfCars.Add(carSpawner.carTags[number]);
         }
     }
 
@@ -136,6 +168,8 @@ public class LightTimer : MonoBehaviour
     {
         if (value == false)
         {
+            tryingToEnable = false;
+
             //Debug Renderer
             renderer.enabled = false;
 
@@ -150,12 +184,14 @@ public class LightTimer : MonoBehaviour
         }
         else
         {
+            tryingToEnable = false;
+
             var transform = this.GetComponent<Transform>();
             Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);
 
             foreach (var collider in colliders)
             {
-                if(collider.tag == tagOfCars)
+                if(tagsOfCars.Contains(collider.tag))
                 {
                     tryingToEnable = true;
 
