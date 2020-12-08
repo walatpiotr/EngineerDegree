@@ -28,10 +28,13 @@ public class CarEngine : MonoBehaviour
 
     private int currentNode = 0;
 
+    public bool LightWantToStartCar = false;
+
     [Header("Sensors")]
     public float sensorLength = 5f;
     public float frontSensorPosition = 0.5f;
 
+    private float timer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +59,16 @@ public class CarEngine : MonoBehaviour
         Brake();
     }
 
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if (LightWantToStartCar)
+        {
+            timer = 2f; 
+            isBraking = false;
+        }
+    }
+
     private void Sensors()
     {
         RaycastHit hit;
@@ -71,12 +84,17 @@ public class CarEngine : MonoBehaviour
         var raycast = Physics.Raycast(redLightChecker, out hit);
         if (raycast)
         {
-            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
+            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 20;
             //Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
-            if(((hit.distance < 2f) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))) 
-                || ((hit.distance < distanceToMeasure) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))))
+            if((hit.distance < 1f) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid)))
             {
                 isBraking = true;
+                Debug.Log("I stopped because i am to near: " + pathNumber);
+            }
+            else if(((hit.distance < distanceToMeasure) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))))
+            {
+                isBraking = true;
+                //Debug.Log("I stopped because my speed is to much: " + pathNumber);
             }
             else
             {

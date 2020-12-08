@@ -95,7 +95,7 @@ public class CarSpawner : MonoBehaviour
 
     private void CarAddAndSetup(CarEngine component, List<Transform> nodes, GameObject car, int numberOfPath)
     {
-        if (CheckCarsPositions(nodes.First().position))
+        if (CheckCarsPositions(nodes.First().position, numberOfPath))
         {
             //Upping first node and a car a little bit when spawn
             var node = nodes.First().position;
@@ -130,13 +130,28 @@ public class CarSpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Could not spawn on path" + nodes.First().position);
+            //Debug.Log("Could not spawn on path" + nodes.First().position);
         }
     }
 
-    private bool CheckCarsPositions(Vector3 position)
+    private bool CheckCarsPositions(Vector3 position, int numberOfPath)
     {
-        var cars = GameObject.FindGameObjectsWithTag("car");
+        string carTag = "car";
+
+        if (numberOfPath < 4)
+        {
+            carTag = "car1";
+        }
+        if (numberOfPath < 8 && numberOfPath > 3)
+        {
+            carTag = "car2";
+        }
+        if (7 < numberOfPath && numberOfPath < 10)
+        {
+            carTag = "car3";
+        }
+
+        var cars = GameObject.FindGameObjectsWithTag(carTag);
         foreach(GameObject car in cars)
         {
             if(Vector3.Distance(position, car.transform.position) < 2f)
@@ -145,6 +160,22 @@ public class CarSpawner : MonoBehaviour
             }
         }
         return true;
+
+        //================
+        /*
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 4.0f);
+
+        foreach (var collider in colliders)
+        {
+            if (collider.tag == tagOfCars)
+            {
+                tryingToEnable = true;
+            }
+        }
+        if (!tryingToEnable)
+        {
+            collider.enabled = true;
+        }*/
     }
 
     private GameObject ChooseCarType()

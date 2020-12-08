@@ -95,7 +95,6 @@ public class LightTimer : MonoBehaviour
                 greenFlag = false;
                 yellowFlag = true;
                 wasGreen = true;
-                renderer.enabled = false;
                 TryToEnableCollider(false);
                 timer = yellow;
                 return;
@@ -107,7 +106,6 @@ public class LightTimer : MonoBehaviour
                     redFlag = true;
                     yellowFlag = false;
                     wasGreen = false;
-                    renderer.enabled = true;
                     TryToEnableCollider(true);
                     timer = red;
                     return;
@@ -117,7 +115,6 @@ public class LightTimer : MonoBehaviour
                     greenFlag = true;
                     yellowFlag = false;
                     wasGreen = true;
-                    renderer.enabled = false;
                     TryToEnableCollider(false);
                     timer = green;
                     return;
@@ -128,7 +125,6 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
-                renderer.enabled = true;
                 TryToEnableCollider(true);
                 timer = yellow;
                 return;
@@ -140,22 +136,39 @@ public class LightTimer : MonoBehaviour
     {
         if (value == false)
         {
+            //Debug Renderer
+            renderer.enabled = false;
+
             collider.enabled = false;
+
+            foreach(GameObject car in carsInMyPath)
+            {
+                var engine = car.GetComponent<CarEngine>();
+                engine.LightWantToStartCar = true;
+            }
+            //Debug.Log("starting all cars");
         }
         else
         {
             var transform = this.GetComponent<Transform>();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 4.0f);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);
 
             foreach (var collider in colliders)
             {
                 if(collider.tag == tagOfCars)
                 {
                     tryingToEnable = true;
+
+                    //Debug
+                    var carPosition = collider.GetComponent<Transform>().position;
+                    //Debug.Log("Can't spawn beacause of some car" + numberOfPath);
                 }
             }
             if(!tryingToEnable)
             {
+                //Debug Renderer
+                renderer.enabled = true;
+
                 collider.enabled = true;
             }
         }
