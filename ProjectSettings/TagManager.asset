@@ -19,6 +19,7 @@ TagManager:
   - car8
   - car9
   - car10
+  - spawner
   layers:
   - Default
   - TransparentFX

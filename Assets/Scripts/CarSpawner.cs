@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
@@ -12,11 +13,20 @@ public class CarSpawner : MonoBehaviour
     public float spawnTime = 1.0f;
     public Dictionary<int, List<GameObject>> carsInPaths = new Dictionary<int, List<GameObject>> { };
     public Dictionary<int, List<GameObject>> nodesInPaths = new Dictionary<int, List<GameObject>> { };
+
+    [Serializable]
+    public struct NamedImage
+    {
+        public int number;
+        public List<GameObject> cars;
+    }
+
+    public List<NamedImage> allCars;
+
     public List<string> wallTags;
     public List<string> carTags;
 
-    private int thisNumber = 0;
-    
+    private bool canUpdate = false;
 
     void Start()
     {
@@ -29,6 +39,20 @@ public class CarSpawner : MonoBehaviour
             i++;
         }
         StartCoroutine(SpawnSetup());
+        canUpdate = true;
+    }
+
+    void Update()
+    {
+        if (canUpdate)
+        {
+            allCars = new List<NamedImage>();
+            foreach (var kvp in carsInPaths)
+            {
+                var x = new NamedImage() { number = kvp.Key, cars = kvp.Value};
+                allCars.Add(x);
+            }
+        }
     }
 
     private IEnumerator SpawnSetup()
@@ -101,7 +125,7 @@ public class CarSpawner : MonoBehaviour
             }
 
             //Adding car to path list of cars
-            carsInPaths[thisNumber].Add(car);
+            carsInPaths[numberOfPath].Add(car);
             Instantiate(car);
         }
         else
@@ -126,7 +150,7 @@ public class CarSpawner : MonoBehaviour
     private GameObject ChooseCarType()
     {
         GameObject car;
-        var randomInt = Random.Range(0, 100);
+        var randomInt = UnityEngine.Random.Range(0, 100);
         if(randomInt < percentageOfBigCars)
         {
             car = bigCar as GameObject;
