@@ -6,15 +6,15 @@ public class LightTimer : MonoBehaviour
 {
     public int number;
 
-    private float green;
-    private float yellow;
-    private float red;
-    private float tBlock;
+    public float green;
+    public float yellow;
+    public float red;
+    public float tBlock;
 
-    private float delay;
+    public float delay;
 
-    private bool greenFlag = true;
-    private bool yellowFlag = false;
+    private bool greenFlag = false;
+    private bool yellowFlag = true;
     private bool tBlockFlag = false;
     private bool redFlag = false;
 
@@ -23,6 +23,7 @@ public class LightTimer : MonoBehaviour
     private float timer = 0f;
 
     private BoxCollider collider;
+    private MeshRenderer renderer;
 
     // Start is called before the first frame update
     void Start()
@@ -33,31 +34,39 @@ public class LightTimer : MonoBehaviour
         yellow = parent.YellowLightTime;
         tBlock = parent.TBlockTime;
 
+        AssignNumber();
+
         red = yellow * 4 + green * 2 + tBlock * 2;
 
         if (number == 1)
         {
-            delay = parent.delayOne;
+            delay = parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime;
         }
-
-        if (number == 2)
+        else if (number == 2)    
         {
-            delay = parent.delayTwo;
+            delay = 2 * (parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime);
         }
-
-        if (number == 3)
+        else if (number == 3)
         {
             delay = 0f;
         }
 
+        Debug.Log(number + "  -  " + delay);
+
         timer = delay;
 
         collider = this.GetComponent<BoxCollider>();
+        renderer = this.GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(number == 3)
+        {
+            Debug.Log(timer);
+        }
+
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
@@ -66,6 +75,7 @@ public class LightTimer : MonoBehaviour
                 greenFlag = false;
                 yellowFlag = true;
                 wasGreen = true;
+                renderer.enabled = false;
                 collider.enabled = false;
                 timer = yellow;
                 return;
@@ -77,6 +87,7 @@ public class LightTimer : MonoBehaviour
                     redFlag = true;
                     yellowFlag = false;
                     wasGreen = false;
+                    renderer.enabled = true;
                     collider.enabled = true;
                     timer = red;
                     return;
@@ -86,6 +97,7 @@ public class LightTimer : MonoBehaviour
                     greenFlag = true;
                     yellowFlag = false;
                     wasGreen = true;
+                    renderer.enabled = false;
                     collider.enabled = false;
                     timer = green;
                     return;
@@ -96,10 +108,27 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
+                renderer.enabled = true;
                 collider.enabled = true;
                 timer = yellow;
                 return;
             }
+        }
+    }
+
+    void AssignNumber()
+    {
+        if(this.tag == "redlightwall1")
+        {
+            number = 1;
+        }
+        else if (this.tag == "redlightwall2")
+        {
+            number = 2;
+        }
+        else if (this.tag == "redlightwall3")
+        {
+            number = 3;
         }
     }
 }
