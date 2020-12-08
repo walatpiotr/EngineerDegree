@@ -2702,7 +2702,7 @@ Transform:
   - {fileID: 697472164}
   - {fileID: 725476155}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &750866244
 GameObject:
@@ -3242,7 +3242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &863722209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3266,9 +3266,9 @@ MonoBehaviour:
   - {fileID: 1106379985}
   - {fileID: 1156735934}
   - {fileID: 1907421269}
+  - {fileID: 908797962}
   - {fileID: 1332477123}
   - {fileID: 743647780}
-  - {fileID: 908797962}
   spawnTime: 1
   wallTags:
   - redlightwall1
@@ -3456,7 +3456,7 @@ Transform:
   - {fileID: 490305557}
   - {fileID: 359114027}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913658632
 GameObject:
@@ -5126,7 +5126,7 @@ Transform:
   - {fileID: 1237103863}
   - {fileID: 1916102440}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 180, y: 90, z: 0}
 --- !u!1 &1345768114
 GameObject:

@@ -21,7 +21,7 @@ public class CarSpawner : MonoBehaviour
     void Start()
     {
         wallTags = new List<string>() { "redlightwall3", "redlightwall2", "redlightwall1" };
-        carTags = new List<string>() { "car1", "car2", "car3", "car4", "car5", "car6", "car7", "car8", "car9", "car10" };
+        carTags = new List<string>() { "car1", "car2", "car3" };
         int i = 0;
         foreach (GameObject path in paths)
         {
@@ -50,75 +50,6 @@ public class CarSpawner : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void Spawn()
-    {
-        GameObject car = ChooseCarType();
-        var component = car.GetComponent<CarEngine>();
-
-        var nodes = GetRandomPath();
-
-        if (!carsInPaths[thisNumber].Any())
-        {
-            CarAddAndSetup(component, nodes, car, thisNumber);
-        }
-        else
-        {
-            var flag = true;
-            while (flag)
-            {
-                if (carsInPaths[thisNumber].Any())
-                {
-                    foreach (GameObject _car in carsInPaths[thisNumber])
-                    {
-                        var distance = Vector3.Distance(_car.transform.position, nodes.First().position);
-                        Debug.Log(distance);
-                        if ( distance > 100.0f)
-                        {
-                            flag = false;
-                            CarAddAndSetup(component, nodes, car, thisNumber);
-                            break;
-                        }
-                        else
-                        {
-                            nodes = GetRandomPath();
-                        }
-                    }
-                }
-                else
-                {
-                    CarAddAndSetup(component, nodes, car, thisNumber);
-                }
-            }
-        }
-    }
-
-    private IEnumerator carSpawner()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnTime);
-            Spawn();
-        }
-    }
-
-    private List<Transform> GetRandomPath()
-    {
-        thisNumber = UnityEngine.Random.Range(0, paths.Count);
-        var path = paths[thisNumber];
-
-        Transform[] transforms = path.GetComponentsInChildren<Transform>();
-        var nodes = new List<Transform>();
-        for (int i = 0; i < transforms.Length; i++)
-        {
-            if (transforms[i] != path.transform)
-            {
-                nodes.Add(transforms[i]);
-            }
-        }
-
-        return nodes;
     }
 
     private List<Transform> GetCertainPath(int num)
@@ -151,19 +82,22 @@ public class CarSpawner : MonoBehaviour
             component.spawner = this;
             component.pathNumber = numberOfPath;
             component.nodes = nodes;
-            component.carTagToAvoid = carTags[numberOfPath];
+            
 
             if (numberOfPath < 4)
             {
                 component.wallTagToAvoid = wallTags[0];
+                component.carTagToAvoid = carTags[0];
             }
-            if (numberOfPath < 7 && numberOfPath > 3 )
+            if (numberOfPath < 8 && numberOfPath > 3 )
             {
                 component.wallTagToAvoid = wallTags[1];
+                component.carTagToAvoid = carTags[1];
             }
-            if (6 < numberOfPath && numberOfPath < 9)
+            if (7 < numberOfPath && numberOfPath < 10)
             {
                 component.wallTagToAvoid = wallTags[2];
+                component.carTagToAvoid = carTags[2];
             }
 
             //Adding car to path list of cars

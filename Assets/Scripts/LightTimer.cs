@@ -15,7 +15,6 @@ public class LightTimer : MonoBehaviour
 
     private bool greenFlag = false;
     private bool yellowFlag = true;
-    private bool tBlockFlag = false;
     private bool redFlag = false;
 
     private bool wasGreen = false;

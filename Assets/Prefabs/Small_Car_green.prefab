@@ -358,7 +358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9059511725352179644}
   m_LocalRotation: {x: 0, y: -0.13451546, z: -0, w: 0.9909115}
-  m_LocalPosition: {x: -43.350002, y: 0.2, z: 4.53}
+  m_LocalPosition: {x: -43.16, y: 0.2, z: 7.170001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9055665271380242302}
@@ -407,7 +407,7 @@ MonoBehaviour:
   maxBreakTorque: 700
   isBraking: 0
   spawner: {fileID: 0}
-  pathNumber: 9
+  pathNumber: 5
   nodes:
   - {fileID: 0}
   - {fileID: 0}
@@ -426,8 +426,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  carTagToAvoid: car10
-  wallTagToAvoid: redlightwall1
+  carTagToAvoid: car2
+  wallTagToAvoid: redlightwall2
   sensorLength: 5
   frontSensorPosition: 0.5
 --- !u!1 &9059529350018802692
