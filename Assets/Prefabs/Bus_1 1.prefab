@@ -740,6 +740,72 @@ MonoBehaviour:
   - car4
   - car10
   - car2
+  - car1
+  - car2
+  - car3
+  - car4
+  - car5
+  - car9
+  - car2
+  - car4
+  - car6
+  - car7
+  - car8
+  - car1
+  - car2
+  - car3
+  - car7
+  - car8
+  - car9
+  - car3
+  - car4
+  - car10
+  - car5
+  - car7
+  - car8
+  - car9
+  - car10
+  - car2
+  - car3
+  - car5
+  - car6
+  - car5
+  - car9
+  - car2
+  - car5
+  - car6
+  - car7
+  - car8
+  - car1
+  - car7
+  - car8
+  - car9
+  - car10
+  - car2
+  - car10
+  - car1
+  - car4
+  - car5
+  - car9
+  - car3
+  - car6
+  - car7
+  - car8
+  - car4
+  - car6
+  - car7
+  - car8
+  - car9
+  - car1
+  - car6
+  - car4
+  - car9
+  - car2
+  - car3
+  - car9
+  - car10
+  - car1
+  - car2
   wallTagToAvoid: redlightwall3
   LightWantToStartCar: 1
   sensorLength: 5
