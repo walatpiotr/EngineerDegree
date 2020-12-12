@@ -23,23 +23,26 @@ public class CarEngine : MonoBehaviour
     public CarSpawner spawner;
     public int pathNumber;
     public List<Transform> nodes;
-    public string carTagToAvoid;
+    public List<string> carTagsToAvoid;
     public string wallTagToAvoid;
 
     private int currentNode = 0;
+
+    public bool LightWantToStartCar = false;
 
     [Header("Sensors")]
     public float sensorLength = 5f;
     public float frontSensorPosition = 0.5f;
 
+    private float timer = 0f;
     // Start is called before the first frame update
     void Start()
     {
         //Rotate toward second node in path
         this.transform.LookAt(nodes[3].position);
 
-        this.tag = carTagToAvoid;
-        this.transform.Find("Body").tag = carTagToAvoid;
+        this.tag = spawner.carTags[pathNumber];
+        this.transform.Find("Body").tag = spawner.carTags[pathNumber];
         maxWheelTorque = 80f;
         maxBreakTorque = 200f;
     }
@@ -54,6 +57,16 @@ public class CarEngine : MonoBehaviour
         KeepRotation();
         CheckIfDestroy();
         Brake();
+    }
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+        if (LightWantToStartCar)
+        {
+            timer = 2f; 
+            isBraking = false;
+        }
     }
 
     private void Sensors()
@@ -71,16 +84,41 @@ public class CarEngine : MonoBehaviour
         var raycast = Physics.Raycast(redLightChecker, out hit);
         if (raycast)
         {
-            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 15;
-            //Debug.Log("Real distance : " + hit.distance + "   Distance by speed :  " + distanceToMeasure);
-            if(((hit.distance < 2f) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))) 
-                || ((hit.distance < distanceToMeasure) && ((hit.collider.tag == carTagToAvoid) || (hit.collider.tag == wallTagToAvoid))))
+            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 20;
+
+            if(pathNumber == 7 || pathNumber == 8)
             {
-                isBraking = true;
+                if ((hit.distance < 1f) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8]) || (hit.collider.tag == wallTagToAvoid)))
+                {
+                    isBraking = true;
+                    Debug.Log("I stopped because i am to near: " + pathNumber);
+                }
+                else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
+                {
+                    isBraking = true;
+                    //Debug.Log("I stopped because my speed is to much: " + pathNumber);
+                }
+                else
+                {
+                    isBraking = false;
+                }
             }
             else
             {
-                isBraking = false;
+                if ((hit.distance < 1f) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid)))
+                {
+                    isBraking = true;
+                    Debug.Log("I stopped because i am to near: " + pathNumber);
+                }
+                else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
+                {
+                    isBraking = true;
+                    //Debug.Log("I stopped because my speed is to much: " + pathNumber);
+                }
+                else
+                {
+                    isBraking = false;
+                }
             }
         }
     }

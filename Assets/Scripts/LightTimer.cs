@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,9 +14,15 @@ public class LightTimer : MonoBehaviour
 
     public float delay;
 
+    //manually
+    public List<int> numberOfPath;
+    //
+
+    public List<GameObject> carsInMyPath;
+    public List<string> tagsOfCars;
+
     private bool greenFlag = false;
     private bool yellowFlag = true;
-    private bool tBlockFlag = false;
     private bool redFlag = false;
 
     private bool wasGreen = false;
@@ -24,11 +31,15 @@ public class LightTimer : MonoBehaviour
 
     private BoxCollider collider;
     private MeshRenderer renderer;
+    public CarSpawner carSpawner;
+    private LightsTimeParametrsHolder parent;
+
+    private bool tryingToEnable = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        LightsTimeParametrsHolder parent = transform.parent.GetComponent<LightsTimeParametrsHolder>();
+        parent = transform.parent.GetComponent<LightsTimeParametrsHolder>();
 
         green = parent.GreenLightTime;
         yellow = parent.YellowLightTime;
@@ -38,11 +49,56 @@ public class LightTimer : MonoBehaviour
 
         red = yellow * 4 + green * 2 + tBlock * 2;
 
+        TimerSetup();
+
+        collider = this.GetComponent<BoxCollider>();
+        renderer = this.GetComponent<MeshRenderer>();
+        try
+        {
+            GameObject spawner = GameObject.FindGameObjectWithTag("spawner");
+            carSpawner = spawner.GetComponent<CarSpawner>();
+            TagsOfCarsSetup();
+        }
+        catch(Exception e)
+        {
+
+        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        CheckCarsInPaths();
+
+        ChangeLights();
+
+        if (tryingToEnable)
+        {
+            TryToEnableCollider(true);
+        }
+    }
+
+    void CheckCarsInPaths()
+    {
+        var carListTemp = new List<GameObject>();
+
+        foreach (var paths in numberOfPath)
+        {
+            carListTemp.AddRange(carSpawner.carsInPaths[paths]);
+        }
+        carsInMyPath = carListTemp;
+    }
+
+    void TimerSetup()
+    {
         if (number == 1)
         {
             delay = parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime;
         }
-        else if (number == 2)    
+        else if (number == 2)
         {
             delay = 2 * (parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime);
         }
@@ -51,23 +107,19 @@ public class LightTimer : MonoBehaviour
             delay = 0f;
         }
 
-        Debug.Log(number + "  -  " + delay);
-
         timer = delay;
-
-        collider = this.GetComponent<BoxCollider>();
-        renderer = this.GetComponent<MeshRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void TagsOfCarsSetup()
     {
-        if(number == 3)
+        foreach(int number in numberOfPath)
         {
-            Debug.Log(timer);
+            tagsOfCars.Add(carSpawner.carTags[number]);
         }
+    }
 
-        timer -= Time.deltaTime;
+    void ChangeLights()
+    {
         if (timer <= 0)
         {
             if (greenFlag) // Green to yellow
@@ -75,8 +127,7 @@ public class LightTimer : MonoBehaviour
                 greenFlag = false;
                 yellowFlag = true;
                 wasGreen = true;
-                renderer.enabled = false;
-                collider.enabled = false;
+                TryToEnableCollider(false);
                 timer = yellow;
                 return;
             }
@@ -87,8 +138,7 @@ public class LightTimer : MonoBehaviour
                     redFlag = true;
                     yellowFlag = false;
                     wasGreen = false;
-                    renderer.enabled = true;
-                    collider.enabled = true;
+                    TryToEnableCollider(true);
                     timer = red;
                     return;
                 }
@@ -97,8 +147,7 @@ public class LightTimer : MonoBehaviour
                     greenFlag = true;
                     yellowFlag = false;
                     wasGreen = true;
-                    renderer.enabled = false;
-                    collider.enabled = false;
+                    TryToEnableCollider(false);
                     timer = green;
                     return;
                 }
@@ -108,10 +157,55 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
-                renderer.enabled = true;
-                collider.enabled = true;
+                TryToEnableCollider(true);
                 timer = yellow;
                 return;
+            }
+        }
+    }
+
+    void TryToEnableCollider(bool value)
+    {
+        if (value == false)
+        {
+            tryingToEnable = false;
+
+            //Debug Renderer
+            renderer.enabled = false;
+
+            collider.enabled = false;
+
+            foreach(GameObject car in carsInMyPath)
+            {
+                var engine = car.GetComponent<CarEngine>();
+                engine.LightWantToStartCar = true;
+            }
+            //Debug.Log("starting all cars");
+        }
+        else
+        {
+            tryingToEnable = false;
+
+            var transform = this.GetComponent<Transform>();
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);
+
+            foreach (var collider in colliders)
+            {
+                if(tagsOfCars.Contains(collider.tag))
+                {
+                    tryingToEnable = true;
+
+                    //Debug
+                    var carPosition = collider.GetComponent<Transform>().position;
+                    //Debug.Log("Can't spawn beacause of some car" + numberOfPath);
+                }
+            }
+            if(!tryingToEnable)
+            {
+                //Debug Renderer
+                renderer.enabled = true;
+
+                collider.enabled = true;
             }
         }
     }
