@@ -20,6 +20,12 @@ TagManager:
   - car9
   - car10
   - spawner
+  - UIText
+  - minutesText
+  - carText
+  - greenTimeText
+  - yellowTimeTExt
+  - tBlockTimeText
   layers:
   - Default
   - TransparentFX

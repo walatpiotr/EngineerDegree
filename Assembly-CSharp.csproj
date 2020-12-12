@@ -57,6 +57,8 @@
     <Compile Include="Assets\Scripts\CarSpawner.cs" />
     <Compile Include="Assets\Scripts\LightTimer.cs" />
     <Compile Include="Assets\Scripts\PathScript.cs" />
+    <Compile Include="Assets\Scripts\SliderText.cs" />
+    <Compile Include="Assets\Scripts\ValidationOfInput.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
