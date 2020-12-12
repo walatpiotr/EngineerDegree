@@ -25,6 +25,7 @@ public class CarEngine : MonoBehaviour
     public List<Transform> nodes;
     public List<string> carTagsToAvoid;
     public string wallTagToAvoid;
+    public GlobalTimerScript gloablTimer;
 
     private int currentNode = 0;
 
@@ -35,6 +36,7 @@ public class CarEngine : MonoBehaviour
     public float frontSensorPosition = 0.5f;
 
     private float timer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -185,6 +187,7 @@ public class CarEngine : MonoBehaviour
         {
             spawner.carsInPaths[pathNumber].Remove(gameObject);
             Destroy(gameObject);
+            gloablTimer.amountOfCarsPassed += 1;
         }
     }
 }

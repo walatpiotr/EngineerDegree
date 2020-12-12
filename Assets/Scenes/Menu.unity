@@ -3057,7 +3057,7 @@ GameObject:
   - component: {fileID: 1398679699}
   m_Layer: 0
   m_Name: ValueHolder
-  m_TagString: valueHandler
+  m_TagString: valueHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
