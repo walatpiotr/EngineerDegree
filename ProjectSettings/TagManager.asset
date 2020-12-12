@@ -26,6 +26,7 @@ TagManager:
   - greenTimeText
   - yellowTimeTExt
   - tBlockTimeText
+  - valueHandler
   layers:
   - Default
   - TransparentFX
