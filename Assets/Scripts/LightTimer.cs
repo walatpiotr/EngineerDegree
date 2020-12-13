@@ -32,21 +32,11 @@ public class LightTimer : MonoBehaviour
     private BoxCollider collider;
     private MeshRenderer renderer;
     public CarSpawner carSpawner;
-    private LightsTimeParametrsHolder parent;
 
     private bool tryingToEnable = false;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        parent = transform.parent.GetComponent<LightsTimeParametrsHolder>();
-
-        green = parent.GreenLightTime;
-        yellow = parent.YellowLightTime;
-        tBlock = parent.TBlockTime;
-
-        AssignNumber();
-
         red = yellow * 4 + green * 2 + tBlock * 2;
 
         TimerSetup();
@@ -59,11 +49,15 @@ public class LightTimer : MonoBehaviour
             carSpawner = spawner.GetComponent<CarSpawner>();
             TagsOfCarsSetup();
         }
-        catch(Exception e)
+        catch (Exception e)
         {
 
         }
-        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
     }
 
     // Update is called once per frame
@@ -96,11 +90,11 @@ public class LightTimer : MonoBehaviour
     {
         if (number == 1)
         {
-            delay = parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime;
+            delay = yellow + green + yellow + tBlock;
         }
         else if (number == 2)
         {
-            delay = 2 * (parent.YellowLightTime + parent.GreenLightTime + parent.YellowLightTime + parent.TBlockTime);
+            delay = 2 * (yellow + green + yellow + tBlock);
         }
         else if (number == 3)
         {

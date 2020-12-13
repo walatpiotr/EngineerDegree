@@ -15,6 +15,7 @@ public class ValueGathering : MonoBehaviour
 
     void Update()
     {
+        valueHolder = GameObject.FindGameObjectWithTag("valueHolder");
         var values = valueHolder.GetComponent<ValueHolderScript>();
         values.minutes = System.Convert.ToInt32(minutes.text);
         values.percentageOfBigCars = System.Convert.ToInt32(percentage.text);

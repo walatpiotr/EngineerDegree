@@ -5,7 +5,7 @@ public class GlobalTimerScript : MonoBehaviour
     public int time;
     public int amountOfCarsPassed = 0;
 
-    private float timer;
+    public float timer;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class GlobalTimerScript : MonoBehaviour
         }
         else
         {
-            //return to mainMenu with value of cars passed
+            timer = 0;
         }
     }
 }

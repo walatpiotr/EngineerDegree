@@ -11,10 +11,27 @@ public class LightsTimeParametrsHolder : MonoBehaviour
     public float delayOne;
     public float delayTwo;
 
+    public List<GameObject> walls;
+
     // Start is called before the first frame update
     void Start()
     {
         delayOne = YellowLightTime+GreenLightTime+YellowLightTime+TBlockTime;
         delayTwo = delayOne * 2;
+
+        SpawnAllRedLights();
+    }
+
+    void SpawnAllRedLights()
+    {
+        foreach (GameObject wall in walls)
+        {
+            var wallParameters = wall.GetComponent<LightTimer>();
+            wallParameters.green = GreenLightTime;
+            wallParameters.yellow = YellowLightTime;
+            wallParameters.tBlock = TBlockTime;
+
+            Instantiate(wall);
+        }
     }
 }

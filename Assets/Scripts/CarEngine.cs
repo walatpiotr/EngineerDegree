@@ -25,7 +25,7 @@ public class CarEngine : MonoBehaviour
     public List<Transform> nodes;
     public List<string> carTagsToAvoid;
     public string wallTagToAvoid;
-    public GlobalTimerScript gloablTimer;
+    public GlobalTimerScript globalTimer;
 
     private int currentNode = 0;
 
@@ -40,6 +40,7 @@ public class CarEngine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        globalTimer = GameObject.FindGameObjectWithTag("globalTimer").GetComponent<GlobalTimerScript>();
         //Rotate toward second node in path
         this.transform.LookAt(nodes[3].position);
 
@@ -52,6 +53,7 @@ public class CarEngine : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        globalTimer = GameObject.FindGameObjectWithTag("globalTimer").GetComponent<GlobalTimerScript>();
         Sensors();
         ApplyStear();
         Drive();
@@ -187,7 +189,7 @@ public class CarEngine : MonoBehaviour
         {
             spawner.carsInPaths[pathNumber].Remove(gameObject);
             Destroy(gameObject);
-            gloablTimer.amountOfCarsPassed += 1;
+            globalTimer.amountOfCarsPassed += 1;
         }
     }
 }

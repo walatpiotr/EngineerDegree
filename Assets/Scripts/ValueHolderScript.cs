@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ValueHolderScript : MonoBehaviour
 {
@@ -10,8 +8,21 @@ public class ValueHolderScript : MonoBehaviour
     public int yellowLightSeconds;
     public int tBlockTimeSeconds;
 
+    public int amountOfCars;
+    public int previouseSceneIndex;
+
+    private static ValueHolderScript playerInstance;
     void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this);
+
+        if (playerInstance == null)
+        {
+            playerInstance = this;
+        }
+        else
+        {
+            DestroyObject(gameObject);
+        }
     }
 }
