@@ -26,6 +26,13 @@ TagManager:
   - greenTimeText
   - yellowTimeTExt
   - tBlockTimeText
+  - valueHandler
+  - valueHolder
+  - lightsController
+  - globalTimer
+  - buttonSUT
+  - buttonNonSUT
+  - animator
   layers:
   - Default
   - TransparentFX
