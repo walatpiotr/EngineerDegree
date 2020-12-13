@@ -52,20 +52,20 @@
     <UnityVersion>2020.1.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\LevelLoaderScript.cs" />
     <Compile Include="Assets\Scripts\ValueGathering.cs" />
     <Compile Include="Assets\Scripts\GlobalTimerScript.cs" />
     <Compile Include="Assets\Scripts\CarEngine.cs" />
     <Compile Include="Assets\Scripts\ValueHolderScript.cs" />
+    <Compile Include="Assets\ClickListener_SUT.cs" />
     <Compile Include="Assets\Scripts\LightsTimeParametrsHolder.cs" />
     <Compile Include="Assets\Scripts\CarSpawner.cs" />
     <Compile Include="Assets\Scripts\ValidationOfInput.cs" />
     <Compile Include="Assets\Scripts\ValueCollector.cs" />
     <Compile Include="Assets\Scripts\LightTimer.cs" />
     <Compile Include="Assets\Scripts\PathScript.cs" />
-    <Compile Include="Assets\Scripts\SliderText.cs" />
-    <Compile Include="Assets\ClickListener_SUT.cs" />
-    <Compile Include="Assets\LevelLoaderScript.cs" />
     <Compile Include="Assets\AmountCollector.cs" />
+    <Compile Include="Assets\Scripts\SliderText.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
