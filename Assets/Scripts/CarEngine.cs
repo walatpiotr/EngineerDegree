@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CarEngine : MonoBehaviour
 {
+    public bool realisticSUT = false;
+    public float SUT = 0f;
+
     public Transform path;
 
     public WheelCollider wheelFL;
@@ -65,12 +68,37 @@ public class CarEngine : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (LightWantToStartCar)
+        if (!realisticSUT)
         {
-            timer = 2f; 
-            isBraking = false;
+            timer -= Time.deltaTime;
+            if (LightWantToStartCar && isBraking)
+            {
+                timer = 2f;
+                isBraking = false;
+            }
+            if (timer <= 0f)
+            {
+                LightWantToStartCar = false;
+            }
         }
+        if (realisticSUT)
+        {
+            if (LightWantToStartCar && SUT >0)
+            {
+                SUT -= Time.deltaTime;
+                isBraking = true;
+                if (SUT <= 0)
+                {
+                    LightWantToStartCar = false;
+                }
+            }
+            else
+            {
+                isBraking = false;
+            }
+            
+        }
+       
     }
 
     private void Sensors()
@@ -92,15 +120,13 @@ public class CarEngine : MonoBehaviour
 
             if(pathNumber == 7 || pathNumber == 8)
             {
-                if ((hit.distance < 1f) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8]) || (hit.collider.tag == wallTagToAvoid)))
+                if ((hit.distance < 2f) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8]) || (hit.collider.tag == wallTagToAvoid)))
                 {
                     isBraking = true;
-                    Debug.Log("I stopped because i am to near: " + pathNumber);
                 }
                 else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
                 {
                     isBraking = true;
-                    //Debug.Log("I stopped because my speed is to much: " + pathNumber);
                 }
                 else
                 {
@@ -109,7 +135,7 @@ public class CarEngine : MonoBehaviour
             }
             else
             {
-                if ((hit.distance < 1f) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid)))
+                if ((hit.distance < 2f) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid)))
                 {
                     isBraking = true;
                     Debug.Log("I stopped because i am to near: " + pathNumber);
@@ -117,7 +143,6 @@ public class CarEngine : MonoBehaviour
                 else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
                 {
                     isBraking = true;
-                    //Debug.Log("I stopped because my speed is to much: " + pathNumber);
                 }
                 else
                 {

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
 {
+    public bool realisticSUT = false;
     public float percentageOfBigCars;
     public GameObject smallCar;
     public GameObject bigCar;
@@ -107,6 +108,7 @@ public class CarSpawner : MonoBehaviour
             component.spawner = this;
             component.pathNumber = numberOfPath;
             component.nodes = nodes;
+            component.realisticSUT = realisticSUT;
 
             if(numberOfPath == 6 || numberOfPath == 7)
             {

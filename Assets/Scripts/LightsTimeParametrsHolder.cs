@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LightsTimeParametrsHolder : MonoBehaviour
 {
+    public bool realisticSUT = false;
     public float GreenLightTime = 10.0f;
     public float YellowLightTime = 1.0f;
     public float TBlockTime = 2.0f;
@@ -108,7 +109,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             wallParameters.green = GreenLightTime;
             wallParameters.yellow = YellowLightTime;
             wallParameters.tBlock = TBlockTime;
-
+            wallParameters.realisticSUT = realisticSUT;
             Instantiate(wall);
         }
     }

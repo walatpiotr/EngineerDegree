@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LightTimer : MonoBehaviour
 {
+    public bool realisticSUT = false;
+
     public int number;
 
     public float green;
@@ -34,6 +36,9 @@ public class LightTimer : MonoBehaviour
     public CarSpawner carSpawner;
 
     private bool tryingToEnable = false;
+
+    //For purpose of finding cars nearest when red light
+
 
     private void Awake()
     {
@@ -134,6 +139,7 @@ public class LightTimer : MonoBehaviour
                     wasGreen = false;
                     TryToEnableCollider(true);
                     timer = red;
+                    SetSUTsForTwoNearestCars();
                     return;
                 }
                 if (wasGreen == false) // Yellow to Green
@@ -219,4 +225,37 @@ public class LightTimer : MonoBehaviour
             number = 3;
         }
     }
+
+    void SetSUTsForTwoNearestCars()
+    {
+        if (realisticSUT)
+        {
+            SetUpCars();
+        }
+    }
+
+    void SetUpCars()
+    {
+        carsInMyPath.Sort(CompareCarsByDistance);
+        var firstCar = carsInMyPath[0].GetComponent<CarEngine>();
+        var secondCar = carsInMyPath[1].GetComponent<CarEngine>();
+
+        //firstCar.SUT =;
+        //secondCar.SUT =;
+    }
+
+    private int CompareCarsByDistance(GameObject x, GameObject y)
+    {
+        Vector3 currentPos = transform.position;
+        float xDistance = Vector3.Distance(x.transform.position, currentPos);
+        float yDistance = Vector3.Distance(y.transform.position, currentPos);
+
+        int retval = xDistance.CompareTo(yDistance);
+
+        return retval;
+    }
+
+
+
+
 }
