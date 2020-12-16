@@ -1835,6 +1835,8 @@ MonoBehaviour:
   startSUT: {fileID: 0}
   startNonSUT: {fileID: 0}
   transitionTime: 1
+  globalTimer: {fileID: 0}
+  valueHolder: {fileID: 0}
 --- !u!4 &509836959
 Transform:
   m_ObjectHideFlags: 0
@@ -3266,6 +3268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   amountOfCarsPassed: 0
+  timer: 0
 --- !u!1 &890244542
 GameObject:
   m_ObjectHideFlags: 0
@@ -3689,15 +3692,27 @@ MonoBehaviour:
   - {fileID: 4874618495607784789, guid: bad77c605bc8b1445985e999f8148c1b, type: 3}
   - {fileID: 713826014320015619, guid: 8ab89b147bbb744429421540a156ab3b, type: 3}
   - {fileID: 3882729472159894700, guid: d882bfe0e92330d479c751880f4f3825, type: 3}
-  wall1: {fileID: 0}
-  wall2: {fileID: 0}
-  wall3: {fileID: 0}
-  wall4: {fileID: 0}
-  wall5: {fileID: 0}
-  wall6: {fileID: 0}
-  wall7: {fileID: 0}
-  wall8: {fileID: 0}
-  wall9: {fileID: 0}
+  timer1: 0
+  timer2: 0
+  timer3: 0
+  lightRed3_1: {fileID: 3914297254549870442, guid: b93d1b2437a32434dbf8c6a7a1381b50, type: 3}
+  lightRed3_2: {fileID: 3846728794861093213, guid: 6337e5676bf28e2429fb5dc29b93a854, type: 3}
+  lightRed2_1: {fileID: 5132241818482530642, guid: 9fc63095bdcf1574789b843e3b987d02, type: 3}
+  lightRed2_2: {fileID: 386108009680726954, guid: 6da0a7d4e92f83c4d8e7153415e70514, type: 3}
+  lightRed1_1: {fileID: 2429775167623117739, guid: 1a96b41b1be82b541a3f1cc506eb1591, type: 3}
+  lightRed1_2: {fileID: 847597584232033361, guid: c5f46b8c2a1dbd6469620a0883fd9bb7, type: 3}
+  lightYellow3_1: {fileID: 1622501800163782001, guid: 861a690da4f385c4d85c53a9777a8da6, type: 3}
+  lightYellow3_2: {fileID: 6420701559648601880, guid: 95db55c245e5a0b429b0113fa1d29beb, type: 3}
+  lightYellow2_1: {fileID: 3574364327969484744, guid: 2dd9e62d7b10a11439ab11ec58296054, type: 3}
+  lightYellow2_2: {fileID: 6382890096779208979, guid: 6f4a6eee46f7daa4b9ed3304d0fb0ec5, type: 3}
+  lightYellow1_1: {fileID: 2234320464877707516, guid: 623aa1ee968648647ad90db62b749d8c, type: 3}
+  lightYellow1_2: {fileID: 6709173889548156901, guid: 49f9745e513023246a42831344f4c7df, type: 3}
+  lightGreen3_1: {fileID: 4996273516626911123, guid: 03892a16a9abd00419e0f2cdada00491, type: 3}
+  lightGreen3_2: {fileID: 1034108788483917473, guid: 2ce738c29ec339840a616c16fe3dcd88, type: 3}
+  lightGreen2_1: {fileID: 4848750000844386554, guid: 783bd8886f6550d4f8254c5b96b7aaa3, type: 3}
+  lightGreen2_2: {fileID: 5824388811045198958, guid: 5445c710dfd1f5a4ebc9dba7a0e4992f, type: 3}
+  lightGreen1_1: {fileID: 2766000351365882633, guid: 7af22183d82b2f8409a1db334b078001, type: 3}
+  lightGreen1_2: {fileID: 2751151794829768065, guid: 6579b42ae8c0535439fc3489c51f08c5, type: 3}
 --- !u!4 &1036123272
 Transform:
   m_ObjectHideFlags: 0
