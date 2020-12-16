@@ -402,6 +402,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa39b5441866f4479a651342803eaa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  realisticSUT: 1
+  SUT: 0
+  generator: {fileID: 0}
   path: {fileID: 0}
   wheelFL: {fileID: 4102902729608297076}
   wheelFR: {fileID: 7376684571357962989}
@@ -410,8 +413,8 @@ MonoBehaviour:
   currentSpeed: 0
   maxSpeed: 90
   maxStearingAngle: 40
-  maxWheelTorque: 70
-  maxBreakTorque: 90
+  maxWheelTorque: 500
+  maxBreakTorque: 700
   isBraking: 0
   spawner: {fileID: 0}
   pathNumber: 2
@@ -808,10 +811,38 @@ MonoBehaviour:
   - car2
   - car2
   - car3
+  - car3
+  - car5
+  - car3
+  - car6
+  - car2
+  - car10
+  - car2
+  - car4
+  - car7
+  - car8
+  - car5
+  - car6
+  - car10
+  - car2
+  - car5
+  - car1
+  - car4
+  - car6
+  - car7
+  - car8
+  - car10
+  - car2
+  - car1
+  - car10
+  - car3
   wallTagToAvoid: redlightwall3
+  globalTimer: {fileID: 0}
   LightWantToStartCar: 1
   sensorLength: 5
   frontSensorPosition: 0.5
+  SUTTimer: 0
+  sutWasLesserThanZero: 0
 --- !u!1 &1984030507710860
 GameObject:
   m_ObjectHideFlags: 0

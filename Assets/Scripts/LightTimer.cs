@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightTimer : MonoBehaviour
 {
     public bool realisticSUT = false;
+    public SUTGeneration generator;
 
     public int number;
 
@@ -29,19 +31,22 @@ public class LightTimer : MonoBehaviour
 
     private bool wasGreen = false;
 
-    private float timer = 0f;
+    public float timer = 0f;
 
     private BoxCollider collider;
     private MeshRenderer renderer;
     public CarSpawner carSpawner;
 
-    private bool tryingToEnable = false;
+    public bool tryingToEnable = false;
+    public bool startingToSetup = false;
 
     //For purpose of finding cars nearest when red light
 
 
     private void Awake()
     {
+        AssignNumber();
+
         red = yellow * 4 + green * 2 + tBlock * 2;
 
         TimerSetup();
@@ -63,11 +68,13 @@ public class LightTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        carsInMyPath = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
         timer -= Time.deltaTime;
 
         CheckCarsInPaths();
@@ -126,7 +133,7 @@ public class LightTimer : MonoBehaviour
                 greenFlag = false;
                 yellowFlag = true;
                 wasGreen = true;
-                TryToEnableCollider(false);
+                TryToEnableCollider(true);
                 timer = yellow;
                 return;
             }
@@ -139,7 +146,6 @@ public class LightTimer : MonoBehaviour
                     wasGreen = false;
                     TryToEnableCollider(true);
                     timer = red;
-                    SetSUTsForTwoNearestCars();
                     return;
                 }
                 if (wasGreen == false) // Yellow to Green
@@ -147,6 +153,7 @@ public class LightTimer : MonoBehaviour
                     greenFlag = true;
                     yellowFlag = false;
                     wasGreen = true;
+                    SetSUTsForTwoNearestCars();
                     TryToEnableCollider(false);
                     timer = green;
                     return;
@@ -157,7 +164,7 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
-                TryToEnableCollider(true);
+                TryToEnableCollider(false);
                 timer = yellow;
                 return;
             }
@@ -172,14 +179,14 @@ public class LightTimer : MonoBehaviour
 
             //Debug Renderer
             renderer.enabled = false;
-
             collider.enabled = false;
-
-            foreach(GameObject car in carsInMyPath)
+            
+            foreach (GameObject car in carsInMyPath)
             {
                 var engine = car.GetComponent<CarEngine>();
-                engine.LightWantToStartCar = true;
+                engine.LightsTurnToGreen();
             }
+            
             //Debug.Log("starting all cars");
         }
         else
@@ -228,7 +235,7 @@ public class LightTimer : MonoBehaviour
 
     void SetSUTsForTwoNearestCars()
     {
-        if (realisticSUT)
+        if (realisticSUT && carsInMyPath.Count!=0)
         {
             SetUpCars();
         }
@@ -237,11 +244,12 @@ public class LightTimer : MonoBehaviour
     void SetUpCars()
     {
         carsInMyPath.Sort(CompareCarsByDistance);
-        var firstCar = carsInMyPath[0].GetComponent<CarEngine>();
-        var secondCar = carsInMyPath[1].GetComponent<CarEngine>();
 
-        //firstCar.SUT =;
-        //secondCar.SUT =;
+
+        var firstCar = carsInMyPath[0];
+        var secondCar = carsInMyPath[1];
+        Debug.Log(firstCar + " : " + secondCar);
+        generator.SetUpValuesForFirstTwoCars(firstCar, secondCar);
     }
 
     private int CompareCarsByDistance(GameObject x, GameObject y)
@@ -250,12 +258,17 @@ public class LightTimer : MonoBehaviour
         float xDistance = Vector3.Distance(x.transform.position, currentPos);
         float yDistance = Vector3.Distance(y.transform.position, currentPos);
 
-        int retval = xDistance.CompareTo(yDistance);
-
-        return retval;
+        if (xDistance > yDistance)
+        {
+            return 1;
+        }
+        if (yDistance > xDistance)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
-
-
-
-
 }

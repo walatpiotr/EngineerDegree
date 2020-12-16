@@ -5,6 +5,8 @@ using UnityEngine;
 public class LightsTimeParametrsHolder : MonoBehaviour
 {
     public bool realisticSUT = false;
+    public SUTGeneration generator = null;
+
     public float GreenLightTime = 10.0f;
     public float YellowLightTime = 1.0f;
     public float TBlockTime = 2.0f;
@@ -110,6 +112,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             wallParameters.yellow = YellowLightTime;
             wallParameters.tBlock = TBlockTime;
             wallParameters.realisticSUT = realisticSUT;
+            wallParameters.generator = generator;
             Instantiate(wall);
         }
     }
@@ -260,7 +263,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 }
                 if (wasGreen3 == false) // Yellow to Green
                 {
-                    Debug.Log("im where I should be");
+                    //Debug.Log("im where I should be");
                     greenFlag3 = true;
                     yellowFlag3 = false;
                     wasGreen3 = true;

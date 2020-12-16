@@ -25,7 +25,7 @@ public class LevelLoaderScript : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(transition.name);
+        //Debug.Log(transition.name);
 
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
