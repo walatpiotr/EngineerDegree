@@ -153,7 +153,6 @@ public class LightTimer : MonoBehaviour
                     greenFlag = true;
                     yellowFlag = false;
                     wasGreen = true;
-                    SetSUTsForTwoNearestCars();
                     TryToEnableCollider(false);
                     timer = green;
                     return;
@@ -180,11 +179,15 @@ public class LightTimer : MonoBehaviour
             //Debug Renderer
             renderer.enabled = false;
             collider.enabled = false;
-            
-            foreach (GameObject car in carsInMyPath)
+
+            if (realisticSUT)
             {
-                var engine = car.GetComponent<CarEngine>();
-                engine.LightsTurnToGreen();
+                SetSUTsForTwoNearestCars();
+            }
+
+            foreach (var car in carsInMyPath)
+            {
+                car.GetComponent<CarEngine>().LightsTurnToGreen();
             }
             
             //Debug.Log("starting all cars");
@@ -217,6 +220,21 @@ public class LightTimer : MonoBehaviour
         }
     }
 
+    private List<GameObject> FindCarsWithTag()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 25.0f);
+        List<GameObject> cars = new List<GameObject>();
+
+        foreach (var collider in colliders)
+        {
+            if (tagsOfCars.Contains(collider.tag))
+            {
+                cars.Add(collider.gameObject);
+            }
+        }
+
+        return cars;
+    }
     void AssignNumber()
     {
         if(this.tag == "redlightwall1")

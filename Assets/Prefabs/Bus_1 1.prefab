@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   realisticSUT: 1
-  SUT: 0
+  SUT: 1.7253637
   generator: {fileID: 0}
   path: {fileID: 0}
   wheelFL: {fileID: 4102902729608297076}
@@ -835,6 +835,13 @@ MonoBehaviour:
   - car2
   - car1
   - car10
+  - car3
+  - car10
+  - car1
+  - car3
+  - car5
+  - car9
+  - car5
   - car3
   wallTagToAvoid: redlightwall3
   globalTimer: {fileID: 0}

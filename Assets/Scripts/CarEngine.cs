@@ -60,6 +60,37 @@ public class CarEngine : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!realisticSUT)
+        {
+            timer -= Time.deltaTime;
+            if (LightWantToStartCar && isBraking)
+            {
+                timer = 2f;
+                isBraking = false;
+            }
+            if (timer <= 0f)
+            {
+                LightWantToStartCar = false;
+            }
+        }
+        if (realisticSUT)
+        {
+            if (LightWantToStartCar)
+            {
+                Debug.Log("Waiting to start, time left: " + SUT);
+
+                SUT -= Time.deltaTime;
+                isBraking = true;
+                currentSpeed = 0f;
+            }
+            if (SUT < 0)
+            {
+                LightWantToStartCar = false;
+                isBraking = false;
+            }
+
+        }
+
         globalTimer = GameObject.FindGameObjectWithTag("globalTimer").GetComponent<GlobalTimerScript>();
         Sensors();
         ApplyStear();
@@ -81,38 +112,6 @@ public class CarEngine : MonoBehaviour
         {
             sutWasLesserThanZero = true;
         }
-
-        if (!realisticSUT)
-        {
-            timer -= Time.deltaTime;
-            if (LightWantToStartCar && isBraking)
-            {
-                timer = 2f;
-                isBraking = false;
-            }
-            if (timer <= 0f)
-            {
-                LightWantToStartCar = false;
-            }
-        }
-        if (realisticSUT)
-        {
-            if (LightWantToStartCar)
-            {
-                Debug.Log("Waiting to start, time left: " + SUT);
-                
-                SUT -= Time.deltaTime;
-                isBraking = true;
-                currentSpeed = 0f;
-            }
-            if (SUT < 0)
-            {
-                LightWantToStartCar = false;
-                isBraking = false;
-            }
-
-        }
-       
     }
 
     private void Sensors()
