@@ -6,7 +6,6 @@ using UnityEngine;
 public class CarEngine : MonoBehaviour
 {
     public bool realisticSUT = false;
-    public float SUT;
     public SUTGeneration generator;
 
     public Transform path;
@@ -31,6 +30,7 @@ public class CarEngine : MonoBehaviour
     public string wallTagToAvoid;
     public GlobalTimerScript globalTimer;
 
+    public bool dontWantToStart = false;
     private int currentNode = 0;
 
     public bool LightWantToStartCar = false;
@@ -43,6 +43,11 @@ public class CarEngine : MonoBehaviour
     public float SUTTimer = 0f;
 
     public bool sutWasLesserThanZero = false;
+
+    public float firstValue = 0f;
+    public float secondValue = 0f;
+
+    public float operationalTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +65,15 @@ public class CarEngine : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!realisticSUT)
+        if (operationalTimer > 0f)
+        {
+            Debug.Log("OperationalTimer = " + operationalTimer);
+            isBraking = true;
+        }
+
+        operationalTimer -= Time.deltaTime;
+
+        /*if (!realisticSUT)
         {
             timer -= Time.deltaTime;
             if (LightWantToStartCar && isBraking)
@@ -72,21 +85,14 @@ public class CarEngine : MonoBehaviour
             {
                 LightWantToStartCar = false;
             }
-        }
+        }*/
         if (realisticSUT)
         {
-            if (LightWantToStartCar)
-            {
-                Debug.Log("Waiting to start, time left: " + SUT);
-
-                SUT -= Time.deltaTime;
-                isBraking = true;
-                currentSpeed = 0f;
-            }
-            if (SUT < 0)
+            if (operationalTimer < 0)
             {
                 LightWantToStartCar = false;
                 isBraking = false;
+                dontWantToStart = false;
             }
 
         }
@@ -99,19 +105,6 @@ public class CarEngine : MonoBehaviour
         KeepRotation();
         CheckIfDestroy();
         Brake();
-    }
-
-    void Update()
-    {
-        if(sutWasLesserThanZero && SUT>0)
-        {
-            Debug.Log("Dodało!!!!!!!!!!!!!"+SUT);
-            sutWasLesserThanZero = false;
-        }
-        if (SUT < 0)
-        {
-            sutWasLesserThanZero = true;
-        }
     }
 
     private void Sensors()
@@ -138,12 +131,23 @@ public class CarEngine : MonoBehaviour
                     Debug.Log("Braking");
                     isBraking = true;
                 }
-                else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
+                else if ((hit.distance < distanceToMeasure) && (hit.collider.tag == spawner.carTags[pathNumber]))
                 {
-                    Debug.Log("Braking");
+                    if (hit.transform.gameObject.GetComponent<CarEngine>().firstValue != 0f)
+                    {
+                        secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
+                    }
+
                     isBraking = true;
                 }
-                else if(!LightWantToStartCar)
+                else if((hit.distance < distanceToMeasure) && (hit.collider.tag == wallTagToAvoid))
+                {
+                    firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
+                    secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
+
+                    isBraking = true;
+                }
+                else
                 {
                     isBraking = false;
                 }
@@ -155,8 +159,19 @@ public class CarEngine : MonoBehaviour
                     isBraking = true;
                     //Debug.Log("I stopped because i am to near: " + pathNumber);
                 }
-                else if (((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid))))
+                else if ((hit.distance < distanceToMeasure) && (hit.collider.tag == spawner.carTags[pathNumber]))
                 {
+                    if(hit.transform.gameObject.GetComponent<CarEngine>().firstValue != 0f)
+                    {
+                        secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
+                    }
+                    isBraking = true;
+                }
+                else if ((hit.distance < distanceToMeasure) && (hit.collider.tag == wallTagToAvoid))
+                {
+                    firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
+                    secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
+
                     isBraking = true;
                 }
                 else
@@ -179,17 +194,21 @@ public class CarEngine : MonoBehaviour
 
     private void Drive()
     {
-        currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 1000;
-        if (currentSpeed < maxSpeed)
+        if (!dontWantToStart)
         {
-            wheelFL.motorTorque = maxWheelTorque;
-            wheelFR.motorTorque = maxWheelTorque;
+            currentSpeed = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm * 60 / 1000;
+            if (currentSpeed < maxSpeed)
+            {
+                wheelFL.motorTorque = maxWheelTorque;
+                wheelFR.motorTorque = maxWheelTorque;
+            }
+            else
+            {
+                wheelFL.motorTorque = 0f;
+                wheelFR.motorTorque = 0f;
+            }
         }
-        else
-        {
-            wheelFL.motorTorque = 0f;
-            wheelFR.motorTorque = 0f;
-        }
+        
     }
 
     private void CheckWaypointDistance()
@@ -233,16 +252,22 @@ public class CarEngine : MonoBehaviour
         }
     }
 
-    public void SetSUT(float value)
-    {
-        this.SUT = value;
-        Debug.Log("Set SUT with:" + SUT);
-
-    }
-
     public void LightsTurnToGreen()
     {
         LightWantToStartCar = true;
-        Debug.Log("Set LWTSC to true");
+        if (LightWantToStartCar)
+        {
+            if (firstValue == 0f)
+            {
+                operationalTimer = secondValue;
+            }
+            if (firstValue != 0f && secondValue != 0f)
+            {
+                operationalTimer = firstValue;
+            }
+            LightWantToStartCar = false;
+            dontWantToStart = true;
+        }
+        Debug.Log("Set LWTSC to "+ LightWantToStartCar+ " so it should set operationalTimer " + operationalTimer);
     }
 }

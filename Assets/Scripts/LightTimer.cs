@@ -33,6 +33,9 @@ public class LightTimer : MonoBehaviour
 
     public float timer = 0f;
 
+    public float firstSUTValue = 0;
+    public float secondSUTValue = 0;
+
     private BoxCollider collider;
     private MeshRenderer renderer;
     public CarSpawner carSpawner;
@@ -63,6 +66,8 @@ public class LightTimer : MonoBehaviour
         {
 
         }
+
+        SetSUTsForTwoNearestCars();
     }
 
     // Start is called before the first frame update
@@ -144,6 +149,7 @@ public class LightTimer : MonoBehaviour
                     redFlag = true;
                     yellowFlag = false;
                     wasGreen = false;
+                    SetSUTsForTwoNearestCars();
                     TryToEnableCollider(true);
                     timer = red;
                     return;
@@ -164,6 +170,10 @@ public class LightTimer : MonoBehaviour
                 yellowFlag = true;
                 wasGreen = false;
                 TryToEnableCollider(false);
+                foreach (var car in carsInMyPath)
+                {
+                    car.GetComponent<CarEngine>().LightsTurnToGreen();
+                }
                 timer = yellow;
                 return;
             }
@@ -180,16 +190,6 @@ public class LightTimer : MonoBehaviour
             renderer.enabled = false;
             collider.enabled = false;
 
-            if (realisticSUT)
-            {
-                SetSUTsForTwoNearestCars();
-            }
-
-            foreach (var car in carsInMyPath)
-            {
-                car.GetComponent<CarEngine>().LightsTurnToGreen();
-            }
-            
             //Debug.Log("starting all cars");
         }
         else
@@ -253,21 +253,19 @@ public class LightTimer : MonoBehaviour
 
     void SetSUTsForTwoNearestCars()
     {
-        if (realisticSUT && carsInMyPath.Count!=0)
+        if (realisticSUT)
         {
-            SetUpCars();
+            SetUpLocalSUTProperties();
         }
     }
 
-    void SetUpCars()
+    void SetUpLocalSUTProperties()
     {
         carsInMyPath.Sort(CompareCarsByDistance);
 
-
-        var firstCar = carsInMyPath[0];
-        var secondCar = carsInMyPath[1];
-        Debug.Log(firstCar + " : " + secondCar);
-        generator.SetUpValuesForFirstTwoCars(firstCar, secondCar);
+        var SUTs = generator.SetUpValuesForFirstTwoCars();
+        firstSUTValue = SUTs[0];
+        secondSUTValue = SUTs[1];
     }
 
     private int CompareCarsByDistance(GameObject x, GameObject y)

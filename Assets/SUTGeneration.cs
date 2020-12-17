@@ -44,26 +44,23 @@ public class SUTGeneration : MonoBehaviour
     private static List<string> situations = 
         new List<string>() { "ff", "fs", "sf", "ss" };
 
-    public void SetUpValuesForFirstTwoCars(GameObject firstCar, GameObject secondCar)
+    public List<float> SetUpValuesForFirstTwoCars()
     {
         string reactionSituation = ChooseSituation();
 
+        List<float> returnFloats = null;
         switch (reactionSituation)
         {
             case "ff":
-                SetUpProperSUTToSituation(firstCar, secondCar, true, true);
-                break;
+                return SetUpProperSUTToSituation(true, true);
             case "fs":
-                SetUpProperSUTToSituation(firstCar, secondCar, true, false);
-                break;
+                return SetUpProperSUTToSituation(true, false);
             case "sf":
-                SetUpProperSUTToSituation(firstCar, secondCar, false, true);
-                break;
+                return SetUpProperSUTToSituation(false, true);
             case "ss":
-                SetUpProperSUTToSituation(firstCar, secondCar, false, false);
-                break;
+                return SetUpProperSUTToSituation(false, false);
         }
-
+        return returnFloats;
     }
 
     private string ChooseSituation()
@@ -90,7 +87,7 @@ public class SUTGeneration : MonoBehaviour
         return situations[Random.Range(0, 4)];
     }
 
-    private void SetUpProperSUTToSituation(GameObject firstCar, GameObject secondCar, bool firstFast, bool secondFast)
+    private List<float> SetUpProperSUTToSituation(bool firstFast, bool secondFast)
     {
         float firstCarValue;
         float secondCarValue;
@@ -121,11 +118,6 @@ public class SUTGeneration : MonoBehaviour
             }
         }
 
-        var firstEngine = firstCar.GetComponent<CarEngine>();
-        var secondEngine = secondCar.GetComponent<CarEngine>();
-
-        firstEngine.SetSUT(firstCarValue);
-        secondEngine.SetSUT(secondCarValue);
-        Debug.Log(firstCarValue+" : " +secondCarValue);
+        return new List<float>(){ firstCarValue, secondCarValue};
     }
 }
