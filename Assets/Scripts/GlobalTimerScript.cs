@@ -24,7 +24,7 @@ public class GlobalTimerScript : MonoBehaviour
         }
         else
         {
-            string fileName = "records/simulationrecords.txt";
+            string fileName = "simulationrecords.txt";
             using (StreamWriter writer = new StreamWriter(fileName))
             {
                 foreach (var tuple in listOfDestroyedCars)

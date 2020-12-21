@@ -160,10 +160,6 @@ public class LightTimer : MonoBehaviour
                     yellowFlag = false;
                     wasGreen = true;
                     TryToEnableCollider(false);
-                    foreach (var car in carsInMyPath)
-                    {
-                        car.GetComponent<CarEngine>().LightsTurnToGreen();
-                    }
                     timer = green;
                     return;
                 }

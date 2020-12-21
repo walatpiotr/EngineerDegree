@@ -33,7 +33,7 @@ public class CarEngine : MonoBehaviour
 
     private int currentNode = 0;
 
-    public bool LightWantToStartCar = false;
+    public bool CarShouldStay = false;
 
     [Header("Sensors")]
     public float sensorLength = 5f;
@@ -47,8 +47,8 @@ public class CarEngine : MonoBehaviour
     public float firstValue = 0f;
     public float secondValue = 0f;
 
-    private float operationalTimer = 0f;
-
+    public float operationalTimer = 0f;
+    public bool StartCounting = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,32 +65,16 @@ public class CarEngine : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (operationalTimer > 0f)
-        {
-            Debug.Log("OperationalTimer = " + operationalTimer);
-            isBraking = true;
-        }
-
-        operationalTimer -= Time.deltaTime;
-
-        if (!realisticSUT)
-        {
-            if (operationalTimer < 0)
-            {
-                LightWantToStartCar = false;
-                isBraking = false;
-            }
-        }
         if (realisticSUT)
         {
             if (operationalTimer < 0)
             {
-                LightWantToStartCar = false;
+                StartCounting = false;
                 isBraking = false;
             }
         }
 
-        globalTimer = GameObject.FindGameObjectWithTag("globalTimer").GetComponent<GlobalTimerScript>();
+        CheckOnceIfWallDisabled();
         Sensors();
         ApplyStear();
         Drive();
@@ -98,8 +82,30 @@ public class CarEngine : MonoBehaviour
         KeepRotation();
         CheckIfDestroy();
         Brake();
+
+        if (StartCounting)
+        {
+            operationalTimer -= Time.deltaTime;
+            isBraking = true;
+        }
     }
 
+    private void CheckOnceIfWallDisabled()
+    {
+        if (realisticSUT)
+        {
+            var walls = GameObject.FindGameObjectsWithTag(wallTagToAvoid);
+            if (!walls[0].GetComponent<BoxCollider>().enabled && CarShouldStay)
+            {
+                Debug.Log("CarShouldStay");
+
+                SetOperationalTimer();
+                StartCounting = true;
+                CarShouldStay = false;
+                Debug.Log("CarShouldStay:" + CarShouldStay);
+            }
+        }
+    }
     private void Sensors()
     {
         RaycastHit hit;
@@ -121,7 +127,7 @@ public class CarEngine : MonoBehaviour
             {
                 if ((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8]) || (hit.collider.tag == wallTagToAvoid)))
                 {
-                    isBraking = true;
+                    isBraking = true;                   
                 }
                 else if ((hit.distance < 2f) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8])))
                 {
@@ -129,14 +135,14 @@ public class CarEngine : MonoBehaviour
                     {
                         secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
                     }
-
+                    CarShouldStay = true;
                     isBraking = true;
                 }
                 else if((hit.distance < 2f) && (hit.collider.tag == wallTagToAvoid))
                 {
                     firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
                     secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
-
+                    CarShouldStay = true;
                     isBraking = true;
                 }
                 else
@@ -156,13 +162,14 @@ public class CarEngine : MonoBehaviour
                     {
                         secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
                     }
+                    CarShouldStay = true;
                     isBraking = true;
                 }
                 else if ((hit.distance < 2f) && (hit.collider.tag == wallTagToAvoid))
                 {
                     firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
                     secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
-
+                    CarShouldStay = true;
                     isBraking = true;
                 }
                 else
@@ -242,10 +249,9 @@ public class CarEngine : MonoBehaviour
         }
     }
 
-    public void LightsTurnToGreen()
+    public void SetOperationalTimer()
     {
-        LightWantToStartCar = true;
-        if (LightWantToStartCar && realisticSUT)
+        if (realisticSUT)
         {
             if (firstValue == 0f)
             {
@@ -255,8 +261,7 @@ public class CarEngine : MonoBehaviour
             {
                 operationalTimer = firstValue;
             }
-            LightWantToStartCar = false;
         }
-        Debug.Log("Set LWTSC to "+ LightWantToStartCar+ " so it should set operationalTimer " + operationalTimer);
+        Debug.Log("Set LWTSC to "+ CarShouldStay + " so it should set operationalTimer " + operationalTimer);
     }
 }
