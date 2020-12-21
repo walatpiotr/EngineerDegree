@@ -365,7 +365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959030373088092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.899998, y: 0.2, z: 20.92}
+  m_LocalPosition: {x: -43.39842, y: 0.2, z: 4.910536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4230925047676480}
@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   realisticSUT: 1
-  SUT: 1.7253637
   generator: {fileID: 0}
   path: {fileID: 0}
   wheelFL: {fileID: 4102902729608297076}
@@ -417,7 +416,7 @@ MonoBehaviour:
   maxBreakTorque: 700
   isBraking: 0
   spawner: {fileID: 0}
-  pathNumber: 2
+  pathNumber: 6
   nodes:
   - {fileID: 0}
   - {fileID: 0}
@@ -843,13 +842,150 @@ MonoBehaviour:
   - car9
   - car5
   - car3
-  wallTagToAvoid: redlightwall3
+  - car2
+  - car1
+  - car9
+  - car10
+  - car6
+  - car6
+  - car4
+  - car1
+  - car4
+  - car7
+  - car8
+  - car6
+  - car6
+  - car9
+  - car1
+  - car2
+  - car3
+  - car4
+  - car5
+  - car6
+  - car9
+  - car10
+  - car2
+  - car3
+  - car6
+  - car7
+  - car8
+  - car9
+  - car4
+  - car6
+  - car9
+  - car10
+  - car1
+  - car3
+  - car7
+  - car8
+  - car10
+  - car6
+  - car7
+  - car8
+  - car2
+  - car5
+  - car7
+  - car8
+  - car9
+  - car3
+  - car4
+  - car5
+  - car6
+  - car1
+  - car3
+  - car7
+  - car8
+  - car10
+  - car5
+  - car1
+  - car6
+  - car4
+  - car7
+  - car8
+  - car10
+  - car7
+  - car8
+  - car1
+  - car2
+  - car3
+  - car5
+  - car6
+  - car5
+  - car7
+  - car8
+  - car9
+  - car10
+  - car1
+  - car6
+  - car7
+  - car8
+  - car3
+  - car7
+  - car8
+  - car10
+  - car5
+  - car6
+  - car7
+  - car8
+  - car9
+  - car1
+  - car3
+  - car6
+  - car2
+  - car7
+  - car8
+  - car1
+  - car2
+  - car5
+  - car6
+  - car9
+  - car10
+  - car1
+  - car1
+  - car4
+  - car6
+  - car9
+  - car10
+  - car3
+  - car5
+  - car6
+  - car5
+  - car7
+  - car8
+  - car9
+  - car5
+  - car6
+  - car7
+  - car8
+  - car10
+  - car3
+  - car5
+  - car6
+  - car7
+  - car8
+  - car3
+  - car6
+  - car9
+  - car1
+  - car2
+  - car4
+  - car9
+  - car2
+  - car3
+  - car4
+  - car5
+  - car6
+  - car7
+  - car8
+  wallTagToAvoid: redlightwall2
   globalTimer: {fileID: 0}
-  LightWantToStartCar: 1
+  LightWantToStartCar: 0
   sensorLength: 5
   frontSensorPosition: 0.5
   SUTTimer: 0
   sutWasLesserThanZero: 0
+  firstValue: 0
+  secondValue: 0
 --- !u!1 &1984030507710860
 GameObject:
   m_ObjectHideFlags: 0

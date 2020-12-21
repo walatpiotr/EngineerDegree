@@ -112,7 +112,6 @@ public class CarSpawner : MonoBehaviour
 
             if(numberOfPath == 6 || numberOfPath == 7)
             {
-                //Debug.Log(carTags[6] + ":" + carTags[7]);
                 component.carTagsToAvoid.Add(carTags[6]);
                 component.carTagsToAvoid.Add(carTags[7]);
 
