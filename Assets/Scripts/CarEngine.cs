@@ -49,6 +49,8 @@ public class CarEngine : MonoBehaviour
 
     public float operationalTimer = 0f;
     public bool StartCounting = false;
+
+    public bool cantBrake = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,13 +67,11 @@ public class CarEngine : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (realisticSUT)
+        if (operationalTimer < 0)
         {
-            if (operationalTimer < 0)
-            {
-                StartCounting = false;
-                isBraking = false;
-            }
+            StartCounting = false;
+            isBraking = false;
+            cantBrake = true;
         }
 
         CheckOnceIfWallDisabled();
@@ -88,14 +88,18 @@ public class CarEngine : MonoBehaviour
             operationalTimer -= Time.deltaTime;
             isBraking = true;
         }
+        if (cantBrake)
+        {
+            isBraking = false;
+        }
     }
 
     private void CheckOnceIfWallDisabled()
     {
-        if (realisticSUT)
+        var walls = GameObject.FindGameObjectsWithTag(wallTagToAvoid);
+        if (!walls[0].GetComponent<BoxCollider>().enabled && CarShouldStay)
         {
-            var walls = GameObject.FindGameObjectsWithTag(wallTagToAvoid);
-            if (!walls[0].GetComponent<BoxCollider>().enabled && CarShouldStay)
+            if (realisticSUT)
             {
                 Debug.Log("CarShouldStay");
 
@@ -104,7 +108,13 @@ public class CarEngine : MonoBehaviour
                 CarShouldStay = false;
                 Debug.Log("CarShouldStay:" + CarShouldStay);
             }
+            else
+            {
+                StartCounting = true;
+                CarShouldStay = false;
+            }
         }
+       
     }
     private void Sensors()
     {
@@ -261,6 +271,10 @@ public class CarEngine : MonoBehaviour
             {
                 operationalTimer = firstValue;
             }
+        }
+        else
+        {
+            operationalTimer = 0f;
         }
         Debug.Log("Set LWTSC to "+ CarShouldStay + " so it should set operationalTimer " + operationalTimer);
     }

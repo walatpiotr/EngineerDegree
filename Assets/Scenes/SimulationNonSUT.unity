@@ -3158,6 +3158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e957accc6f24c4a8b6a52a86f4d39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  realisticSUT: 0
   percentageOfBigCars: 50
   smallCar: {fileID: 9059511725352179644, guid: 4ba1ff639abb9f94fb51a896d7a393ab, type: 3}
   bigCar: {fileID: 1959030373088092, guid: e00cf7417f0772f4185f6652fe06c900, type: 3}
@@ -3172,7 +3173,7 @@ MonoBehaviour:
   - {fileID: 908797962}
   - {fileID: 1332477123}
   - {fileID: 743647780}
-  spawnTime: 1
+  spawnTime: 0.1
   allCars: []
   wallTags:
   - redlightwall1
@@ -3677,6 +3678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5e42d907916dc4d8ea83759777d65b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  realisticSUT: 0
+  generator: {fileID: 0}
   GreenLightTime: 10
   YellowLightTime: 1
   TBlockTime: 2
