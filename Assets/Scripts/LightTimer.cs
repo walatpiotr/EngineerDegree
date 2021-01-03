@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightTimer : MonoBehaviour
 {
     public bool realisticSUT = false;
+    public SUTGeneration generator;
 
     public int number;
 
@@ -29,19 +31,25 @@ public class LightTimer : MonoBehaviour
 
     private bool wasGreen = false;
 
-    private float timer = 0f;
+    public float timer = 0f;
+
+    public float firstSUTValue = 0;
+    public float secondSUTValue = 0;
 
     private BoxCollider collider;
     private MeshRenderer renderer;
     public CarSpawner carSpawner;
 
-    private bool tryingToEnable = false;
+    public bool tryingToEnable = false;
+    public bool startingToSetup = false;
 
     //For purpose of finding cars nearest when red light
 
 
     private void Awake()
     {
+        AssignNumber();
+
         red = yellow * 4 + green * 2 + tBlock * 2;
 
         TimerSetup();
@@ -58,16 +66,20 @@ public class LightTimer : MonoBehaviour
         {
 
         }
+
+        SetSUTsForTwoNearestCars();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        carsInMyPath = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
+       
         timer -= Time.deltaTime;
 
         CheckCarsInPaths();
@@ -126,7 +138,7 @@ public class LightTimer : MonoBehaviour
                 greenFlag = false;
                 yellowFlag = true;
                 wasGreen = true;
-                TryToEnableCollider(false);
+                TryToEnableCollider(true);
                 timer = yellow;
                 return;
             }
@@ -137,9 +149,9 @@ public class LightTimer : MonoBehaviour
                     redFlag = true;
                     yellowFlag = false;
                     wasGreen = false;
+                    SetSUTsForTwoNearestCars();
                     TryToEnableCollider(true);
                     timer = red;
-                    SetSUTsForTwoNearestCars();
                     return;
                 }
                 if (wasGreen == false) // Yellow to Green
@@ -157,7 +169,7 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
-                TryToEnableCollider(true);
+                TryToEnableCollider(false);
                 timer = yellow;
                 return;
             }
@@ -172,14 +184,8 @@ public class LightTimer : MonoBehaviour
 
             //Debug Renderer
             renderer.enabled = false;
-
             collider.enabled = false;
 
-            foreach(GameObject car in carsInMyPath)
-            {
-                var engine = car.GetComponent<CarEngine>();
-                engine.LightWantToStartCar = true;
-            }
             //Debug.Log("starting all cars");
         }
         else
@@ -210,6 +216,21 @@ public class LightTimer : MonoBehaviour
         }
     }
 
+    private List<GameObject> FindCarsWithTag()
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 25.0f);
+        List<GameObject> cars = new List<GameObject>();
+
+        foreach (var collider in colliders)
+        {
+            if (tagsOfCars.Contains(collider.tag))
+            {
+                cars.Add(collider.gameObject);
+            }
+        }
+
+        return cars;
+    }
     void AssignNumber()
     {
         if(this.tag == "redlightwall1")
@@ -230,18 +251,17 @@ public class LightTimer : MonoBehaviour
     {
         if (realisticSUT)
         {
-            SetUpCars();
+            SetUpLocalSUTProperties();
         }
     }
 
-    void SetUpCars()
+    void SetUpLocalSUTProperties()
     {
         carsInMyPath.Sort(CompareCarsByDistance);
-        var firstCar = carsInMyPath[0].GetComponent<CarEngine>();
-        var secondCar = carsInMyPath[1].GetComponent<CarEngine>();
-
-        //firstCar.SUT =;
-        //secondCar.SUT =;
+        Debug.Log("Generating");
+        var SUTs = generator.SetUpValuesForFirstTwoCars();
+        firstSUTValue = SUTs[0];
+        secondSUTValue = SUTs[1];
     }
 
     private int CompareCarsByDistance(GameObject x, GameObject y)
@@ -250,12 +270,17 @@ public class LightTimer : MonoBehaviour
         float xDistance = Vector3.Distance(x.transform.position, currentPos);
         float yDistance = Vector3.Distance(y.transform.position, currentPos);
 
-        int retval = xDistance.CompareTo(yDistance);
-
-        return retval;
+        if (xDistance > yDistance)
+        {
+            return 1;
+        }
+        if (yDistance > xDistance)
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
-
-
-
-
 }

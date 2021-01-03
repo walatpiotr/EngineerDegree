@@ -11,7 +11,7 @@ public class CarSpawner : MonoBehaviour
     public GameObject smallCar;
     public GameObject bigCar;
     public List<GameObject> paths;
-    public float spawnTime = 1.0f;
+    public float spawnTime = 0.1f;
     public Dictionary<int, List<GameObject>> carsInPaths = new Dictionary<int, List<GameObject>> { };
     public Dictionary<int, List<GameObject>> nodesInPaths = new Dictionary<int, List<GameObject>> { };
 
@@ -112,7 +112,6 @@ public class CarSpawner : MonoBehaviour
 
             if(numberOfPath == 6 || numberOfPath == 7)
             {
-                Debug.Log(carTags[6] + ":" + carTags[7]);
                 component.carTagsToAvoid.Add(carTags[6]);
                 component.carTagsToAvoid.Add(carTags[7]);
 
