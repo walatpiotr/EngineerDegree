@@ -71,27 +71,23 @@ public class CarEngine : MonoBehaviour
         {
             StartCounting = false;
             isBraking = false;
-            cantBrake = true;
         }
 
         CheckOnceIfWallDisabled();
         Sensors();
         ApplyStear();
-        Drive();
         CheckWaypointDistance();
         KeepRotation();
         CheckIfDestroy();
-        Brake();
 
         if (StartCounting)
         {
             operationalTimer -= Time.deltaTime;
             isBraking = true;
         }
-        if (cantBrake)
-        {
-            isBraking = false;
-        }
+
+        Drive();
+        Brake();
     }
 
     private void CheckOnceIfWallDisabled()
@@ -187,6 +183,11 @@ public class CarEngine : MonoBehaviour
                     isBraking = false;
                 }
             }
+        }
+        else
+        {
+            Debug.Log("I am free!" + this);
+            isBraking = false;
         }
     }
 

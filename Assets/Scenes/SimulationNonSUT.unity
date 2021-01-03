@@ -3159,7 +3159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   realisticSUT: 0
-  percentageOfBigCars: 50
+  percentageOfBigCars: 10
   smallCar: {fileID: 9059511725352179644, guid: 4ba1ff639abb9f94fb51a896d7a393ab, type: 3}
   bigCar: {fileID: 1959030373088092, guid: e00cf7417f0772f4185f6652fe06c900, type: 3}
   paths:
@@ -3267,7 +3267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d5729f0e28ed6e468b35de8473b009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
+  time: 600
   amountOfCarsPassed: 0
   timer: 0
 --- !u!1 &890244542
@@ -3680,8 +3680,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   realisticSUT: 0
   generator: {fileID: 0}
-  GreenLightTime: 10
-  YellowLightTime: 1
+  GreenLightTime: 45
+  YellowLightTime: 2
   TBlockTime: 2
   delayOne: 0
   delayTwo: 0

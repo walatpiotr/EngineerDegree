@@ -3216,7 +3216,7 @@ MonoBehaviour:
   - {fileID: 908797962}
   - {fileID: 1332477123}
   - {fileID: 743647780}
-  spawnTime: 1
+  spawnTime: 0.1
   allCars: []
   wallTags:
   - redlightwall1

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SUTGeneration : MonoBehaviour
@@ -21,11 +21,12 @@ public class SUTGeneration : MonoBehaviour
     private static float medianFirst = 1.35f; 
     private static float maxFirst = 4.32f;
 
-    private static float minSecond = 1.16f;
+    private static float minSecond = -0.20f;
     private static float meanSecond = 2.64f;
     private static float medianSecond = 2.48f;
-    private static float maxSecond = 4.78f;
+    private static float maxSecond = 2.44f;
 
+    private static float maxSecond2 = 4.78f;
     //Do not sure if needed
     private static float fastRatioOfFirstCar = 77.27f;
     private static float slowRatioOfFirstCar = 22.73f;
@@ -38,8 +39,8 @@ public class SUTGeneration : MonoBehaviour
     private static float fastFirstClusterCenter = 1.07f;
     private static float slowFirstClusterCenter = 2.97f;
 
-    private static float fastSecondClusterCenter = 2.18f;
-    private static float slowSecondClusterCenter = 3.75f;
+    private static float fastSecondClusterCenter = 0.66f;
+    private static float slowSecondClusterCenter = 1.98f;
 
     private static List<string> situations = 
         new List<string>() { "ff", "fs", "sf", "ss" };
@@ -89,6 +90,17 @@ public class SUTGeneration : MonoBehaviour
 
     private List<float> SetUpProperSUTToSituation(bool firstFast, bool secondFast)
     {
+        var results = Generation(firstFast, secondFast);
+        while(results.Sum(x => x) > maxSecond2 || results.Sum(x => x) < 1.16f)
+        {
+            results = Generation(firstFast, secondFast);
+        }
+
+        return results;
+    }
+
+    public List<float> Generation(bool firstFast, bool secondFast)
+    {
         float firstCarValue;
         float secondCarValue;
         if (firstFast)
@@ -101,14 +113,14 @@ public class SUTGeneration : MonoBehaviour
             else
             {
                 firstCarValue = Random.Range(minFirst, minFirst + 2 * (fastFirstClusterCenter - minFirst));
-                secondCarValue = Random.Range(maxSecond - 2 * (maxSecond-slowSecondClusterCenter), maxSecond);
+                secondCarValue = Random.Range(maxSecond - 2 * (maxSecond - slowSecondClusterCenter), maxSecond);
             }
         }
         else
         {
             if (secondFast)
             {
-                firstCarValue = Random.Range(maxFirst - 2 * (maxFirst-slowFirstClusterCenter), maxFirst);
+                firstCarValue = Random.Range(maxFirst - 2 * (maxFirst - slowFirstClusterCenter), maxFirst);
                 secondCarValue = Random.Range(minSecond, minSecond + 2 * (fastSecondClusterCenter - minSecond));
             }
             else
@@ -118,6 +130,6 @@ public class SUTGeneration : MonoBehaviour
             }
         }
 
-        return new List<float>(){ firstCarValue, secondCarValue};
+        return new List<float>() { firstCarValue, secondCarValue };
     }
 }
