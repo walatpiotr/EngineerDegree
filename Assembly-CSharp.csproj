@@ -63,11 +63,11 @@
     <Compile Include="Assets\Scripts\LightsTimeParametrsHolder.cs" />
     <Compile Include="Assets\Scripts\CarSpawner.cs" />
     <Compile Include="Assets\Scripts\ValidationOfInput.cs" />
+    <Compile Include="Assets\Scripts\SUTTestGenerator.cs" />
     <Compile Include="Assets\Scripts\ValueCollector.cs" />
     <Compile Include="Assets\Scripts\PathScript.cs" />
     <Compile Include="Assets\Scripts\AmountCollector.cs" />
     <Compile Include="Assets\Scripts\SliderText.cs" />
-    <Compile Include="Assets\Scripts\SUTTestGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -82,9 +82,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\Models\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\Models\BrokenVector\LowPolyShaders\Shaders\LowPolyPBRShader.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />

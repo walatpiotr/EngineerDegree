@@ -66,7 +66,7 @@ public class LightTimer : MonoBehaviour
         {
 
         }
-
+        renderer.enabled = false;
         SetSUTsForTwoNearestCars();
     }
 
@@ -182,8 +182,6 @@ public class LightTimer : MonoBehaviour
         {
             tryingToEnable = false;
 
-            //Debug Renderer
-            renderer.enabled = false;
             collider.enabled = false;
 
             //Debug.Log("starting all cars");
@@ -208,8 +206,6 @@ public class LightTimer : MonoBehaviour
             }
             if(!tryingToEnable)
             {
-                //Debug Renderer
-                renderer.enabled = true;
 
                 collider.enabled = true;
             }
