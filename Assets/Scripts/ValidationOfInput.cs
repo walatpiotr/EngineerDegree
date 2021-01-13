@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class ValidationOfInput : MonoBehaviour
@@ -24,10 +25,6 @@ public class ValidationOfInput : MonoBehaviour
                 {
                     AssignTextWithValue();
                 }
-                else
-                {
-                    input.text = "has to be digit only";
-                }
             }
         }
     }
@@ -35,7 +32,6 @@ public class ValidationOfInput : MonoBehaviour
     void AssignTextWithValue()
     {
         inputText.text = input.text;
-        input.text = "";
     }
 
     bool Validation(string input)
@@ -48,7 +44,10 @@ public class ValidationOfInput : MonoBehaviour
         foreach (char c in str)
         {
             if (c < '0' || c > '9')
+            {
+                input.text = "Must be digit";
                 return false;
+            }
         }
 
         return true;

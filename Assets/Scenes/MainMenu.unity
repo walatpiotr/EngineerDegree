@@ -2600,7 +2600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSUT: {fileID: 1562498501}
   textNonSUT: {fileID: 583283533}
-  values: {fileID: 0}
+  values: {fileID: 1398679699}
 --- !u!1 &765279200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2784,6 +2784,9 @@ MonoBehaviour:
   transitionTime: 1
   globalTimer: {fileID: 0}
   valueHolder: {fileID: 0}
+  greenInput: {fileID: 332988566}
+  yellowInput: {fileID: 1516762687}
+  tBlockInput: {fileID: 1948876707}
 --- !u!4 &796797042
 Transform:
   m_ObjectHideFlags: 0
@@ -3222,9 +3225,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minutes: {fileID: 765279202}
   percentage: {fileID: 216212725}
-  green: {fileID: 1498249069}
-  yellow: {fileID: 179588083}
-  tBlock: {fileID: 1864998464}
+  greenInput: {fileID: 332988566}
+  yellowInput: {fileID: 1516762687}
+  tBlockInput: {fileID: 1948876707}
   valueHolder: {fileID: 1398679698}
 --- !u!4 &1331417949
 Transform:
