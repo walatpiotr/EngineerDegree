@@ -16,24 +16,8 @@ public class AbandonAttempt : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void LoadLevel(int levelIndex)
     {
-        abandonButton.onClick.AddListener(GoToMainMenu);
-    }
-
-    // Update is called once per frame
-    void GoToMainMenu()
-    {
-        StartCoroutine(LoadLevel(0));
-    }
-
-    IEnumerator LoadLevel(int levelIndex)
-    {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(transitionTime);
-
         SceneManager.LoadScene(levelIndex);
     }
 }

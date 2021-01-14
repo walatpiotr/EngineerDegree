@@ -55,11 +55,14 @@
     <Compile Include="Assets\Scripts\LevelLoaderScript.cs" />
     <Compile Include="Assets\Scripts\ValueGathering.cs" />
     <Compile Include="Assets\Scripts\GlobalTimerScript.cs" />
+    <Compile Include="Assets\FreeFlyCamera\Scripts\FreeFlyCamera.cs" />
     <Compile Include="Assets\Scripts\SUTGeneration.cs" />
     <Compile Include="Assets\Scripts\CarEngine.cs" />
     <Compile Include="Assets\Scripts\ValueHolderScript.cs" />
     <Compile Include="Assets\Scripts\LightTimer.cs" />
+    <Compile Include="Assets\FreeFlyCamera\Demo\Scripts\ToggleGameObjectEnable.cs" />
     <Compile Include="Assets\Scripts\ClickListener_SUT.cs" />
+    <Compile Include="Assets\Scripts\QuitApplication.cs" />
     <Compile Include="Assets\Scripts\LightsTimeParametrsHolder.cs" />
     <Compile Include="Assets\Scripts\AbandonAttempt.cs" />
     <Compile Include="Assets\Scripts\CarSpawner.cs" />
@@ -70,9 +73,7 @@
     <Compile Include="Assets\Scripts\PathScript.cs" />
     <Compile Include="Assets\Scripts\AmountCollector.cs" />
     <Compile Include="Assets\Scripts\SliderText.cs" />
-    <Compile Include="Assets\Scripts\QuitApplication.cs" />
-    <Compile Include="Assets\FreeFlyCamera\Scripts\FreeFlyCamera.cs" />
-    <Compile Include="Assets\FreeFlyCamera\Demo\Scripts\ToggleGameObjectEnable.cs" />
+    <Compile Include="Assets\Scripts\BackToMainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

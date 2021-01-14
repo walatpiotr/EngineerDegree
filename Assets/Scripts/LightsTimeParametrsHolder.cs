@@ -81,8 +81,8 @@ public class LightsTimeParametrsHolder : MonoBehaviour
         delayTwo = delayOne * 2;
 
         timer3 = 0f;
-        timer2 = delayTwo;
-        timer1 = delayOne;
+        timer1 = delayTwo;
+        timer2 = delayOne;
         RedLightTime = YellowLightTime * 4 + GreenLightTime * 2 + TBlockTime * 2;
         StartingSetup();
     }
