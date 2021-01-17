@@ -2124,7 +2124,7 @@ MonoBehaviour:
   startNonSUT: {fileID: 1002369607}
   transitionTime: 1
   globalTimer: {fileID: 0}
-  valueHolder: {fileID: 0}
+  valueHolder: {fileID: 1398679699}
   greenInput: {fileID: 0}
   yellowInput: {fileID: 0}
   tBlockInput: {fileID: 0}

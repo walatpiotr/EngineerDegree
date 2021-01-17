@@ -10,7 +10,7 @@ public class CarEngine : MonoBehaviour
     public SUTGeneration generator;
 
     public Transform path;
-
+    public string typeOfCar;
     public WheelCollider wheelFL;
     public WheelCollider wheelFR;
     public WheelCollider wheelBL;
@@ -51,6 +51,8 @@ public class CarEngine : MonoBehaviour
     public bool StartCounting = false;
 
     public bool cantBrake = false;
+
+    private float angle = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +62,9 @@ public class CarEngine : MonoBehaviour
 
         this.tag = spawner.carTags[pathNumber];
         this.transform.Find("Body").tag = spawner.carTags[pathNumber];
-        maxWheelTorque = 80f;
-        maxBreakTorque = 200f;
+        
+        //maxWheelTorque = 80f;
+       // maxBreakTorque = 150f;
     }
 
     // Update is called once per frame
@@ -119,69 +122,71 @@ public class CarEngine : MonoBehaviour
         //properties of ray setup (to avoid self and ground detecting)
         Vector3 destinationOfRay = transform.forward;
         destinationOfRay.y = 0.1f;
+
         var positieVoor = transform.position + transform.forward;
 
         Debug.DrawRay(positieVoor, destinationOfRay, Color.green);
         Ray redLightChecker = new Ray(positieVoor, destinationOfRay);
+        var raycast1 = Physics.Raycast(redLightChecker, out hit);
 
-        var raycast = Physics.Raycast(redLightChecker, out hit);
-        if (raycast)
+
+        if (raycast1)
         {
             var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 20;
 
-            if(pathNumber == 7 || pathNumber == 8)
+
+            if (hit.distance < distanceToMeasure)
             {
-                if ((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8]) || (hit.collider.tag == wallTagToAvoid)))
+                foreach (string car in carTagsToAvoid)
                 {
-                    isBraking = true;                   
-                }
-                else if ((hit.distance < 2f) && ((hit.collider.tag == spawner.carTags[7]) || (hit.collider.tag == spawner.carTags[8])))
-                {
-                    if (hit.transform.gameObject.GetComponent<CarEngine>().firstValue != 0f)
+                    if (hit.collider.tag == car)
                     {
-                        secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
+                        var carInFront = hit.transform.gameObject.GetComponent<CarEngine>();
+                        if (carInFront.currentSpeed < this.currentSpeed)
+                        {
+                            isBraking = true;
+                        }
                     }
-                    CarShouldStay = true;
-                    isBraking = true;
+                    else
+                    {
+                        Debug.Log("XXX");
+                        isBraking = false;
+                    }
                 }
-                else if((hit.distance < 2f) && (hit.collider.tag == wallTagToAvoid))
+                if (hit.collider.tag == wallTagToAvoid)
                 {
-                    firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
-                    secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
-                    CarShouldStay = true;
                     isBraking = true;
                 }
-                else
+            }
+            else if ((hit.distance < 2f))
+            {
+                foreach (string car in carTagsToAvoid)
+                {
+                    if (hit.collider.tag == car)
+                    {
+                        if (hit.transform.gameObject.GetComponent<CarEngine>().firstValue != 0f)
+                        {
+                            secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
+                        }
+                        CarShouldStay = true;
+                        isBraking = true;
+                    }
+                }
+                if (hit.collider.tag == wallTagToAvoid)
                 {
                     isBraking = false;
                 }
             }
+            else if ((hit.distance < 1f) && (hit.collider.tag == wallTagToAvoid))
+            {
+                firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
+                secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
+                CarShouldStay = true;
+                isBraking = true;
+            }
             else
             {
-                if ((hit.distance < distanceToMeasure) && ((hit.collider.tag == spawner.carTags[pathNumber]) || (hit.collider.tag == wallTagToAvoid)))
-                {
-                    isBraking = true;
-                }
-                else if ((hit.distance < 2f) && (hit.collider.tag == spawner.carTags[pathNumber]))
-                {
-                    if(hit.transform.gameObject.GetComponent<CarEngine>().firstValue != 0f)
-                    {
-                        secondValue = hit.transform.gameObject.GetComponent<CarEngine>().secondValue;
-                    }
-                    CarShouldStay = true;
-                    isBraking = true;
-                }
-                else if ((hit.distance < 2f) && (hit.collider.tag == wallTagToAvoid))
-                {
-                    firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
-                    secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
-                    CarShouldStay = true;
-                    isBraking = true;
-                }
-                else
-                {
-                    isBraking = false;
-                }
+                isBraking = false;
             }
         }
         else

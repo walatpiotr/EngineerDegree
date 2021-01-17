@@ -61,19 +61,16 @@ public class CarSpawner : MonoBehaviour
     {
         while (true)
         {
-            int i = 0;
-            foreach (KeyValuePair<int, List<GameObject>> pair in carsInPaths)
+            int k = 0;
+            foreach (GameObject path in paths)
             {
+                int i = k % paths.Count;
                 yield return new WaitForSeconds(spawnTime);
                 var nodes = GetCertainPath(i);
                 GameObject car = ChooseCarType();
                 var component = car.GetComponent<CarEngine>();
                 CarAddAndSetup(component, nodes, car, i);
-                i++;
-                if (i > paths.Count)
-                {
-                    break;
-                }
+                k++;
             }
         }
     }
@@ -110,11 +107,13 @@ public class CarSpawner : MonoBehaviour
             component.nodes = nodes;
             component.realisticSUT = realisticSUT;
 
+            component.carTagsToAvoid = new List<string>();
+
             if(numberOfPath == 6 || numberOfPath == 7)
             {
-                component.carTagsToAvoid.Add(carTags[6]);
+                
                 component.carTagsToAvoid.Add(carTags[7]);
-
+                component.carTagsToAvoid.Add(carTags[6]);
             }
             else
             {
@@ -177,9 +176,13 @@ public class CarSpawner : MonoBehaviour
         if(randomInt < percentageOfBigCars)
         {
             car = bigCar as GameObject;
+            var component = car.GetComponent<CarEngine>();
+            component.typeOfCar = "big";
         }
         else{
             car = smallCar as GameObject;
+            var component = car.GetComponent<CarEngine>();
+            component.typeOfCar = "small";
         }
         return car;
     }
