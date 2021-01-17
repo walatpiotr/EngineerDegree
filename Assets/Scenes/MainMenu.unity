@@ -794,6 +794,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -894,6 +902,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_yellow_light
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758693752995, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_TagString
+      value: sliderYellow
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_MinValue
       value: 2
@@ -986,6 +998,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722759962242671, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_Color.r
       value: 0.10980392
@@ -1073,6 +1093,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
   m_PrefabInstance: {fileID: 479345330}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &479345332 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+  m_PrefabInstance: {fileID: 479345330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &512843568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,6 +1556,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1625,6 +1664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_green_light
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758693752995, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_TagString
+      value: sliderGreen
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_MinValue
       value: 8
@@ -1717,6 +1760,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722759962242671, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_Color.r
       value: 0.10980392
@@ -1804,6 +1855,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
   m_PrefabInstance: {fileID: 608483649}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &608483651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+  m_PrefabInstance: {fileID: 608483649}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &643099305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,6 +2879,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2917,6 +2987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_blocking
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758693752995, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_TagString
+      value: sliderTBlock
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_MinValue
       value: 2
@@ -3009,6 +3083,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722759962242671, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_Color.r
       value: 0.10980392
@@ -3096,6 +3178,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
   m_PrefabInstance: {fileID: 1499350012}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1499350014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+  m_PrefabInstance: {fileID: 1499350012}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1540563596
 GameObject:
   m_ObjectHideFlags: 0
@@ -3416,6 +3509,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1783142306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1783142307}
+  - component: {fileID: 1783142308}
+  m_Layer: 0
+  m_Name: ValueSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1783142307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783142306}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 607, y: 329, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1783142308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783142306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b21b1425d5cc946a6815bea07c3244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueHolder: {fileID: 1398679698}
+  minutes: {fileID: 346023637}
+  vehicles: {fileID: 8059837645339997287}
+  green: {fileID: 608483651}
+  yellow: {fileID: 479345332}
+  tBlock: {fileID: 1499350014}
 --- !u!224 &1850177403 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5007662705897331351, guid: 074653815fcb5774493cbc40d38e215d, type: 3}
@@ -3711,6 +3853,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_minutes
       objectReference: {fileID: 0}
+    - target: {fileID: 5007662705897331350, guid: 074653815fcb5774493cbc40d38e215d, type: 3}
+      propertyPath: m_TagString
+      value: sliderMinutes
+      objectReference: {fileID: 0}
     - target: {fileID: 5007662705897331351, guid: 074653815fcb5774493cbc40d38e215d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3972,6 +4118,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722758260434363, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722758693752994, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4068,6 +4222,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider_cars
       objectReference: {fileID: 0}
+    - target: {fileID: 3072722758693752995, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_TagString
+      value: sliderVehicles
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072722759082776745, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_text
       value: Percentage Of Heavy Vehicles
@@ -4146,6 +4308,10 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072722759962242668, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3072722759962242671, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
@@ -4230,3 +4396,14 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+--- !u!114 &8059837645339997287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3072722758693752997, guid: 00e3549a2b77ae84fbc25772fc841ac3, type: 3}
+  m_PrefabInstance: {fileID: 8059837645339997286}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

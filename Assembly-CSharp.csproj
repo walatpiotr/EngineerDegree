@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\QuitApplication.cs" />
     <Compile Include="Assets\Scripts\LightsTimeParametrsHolder.cs" />
     <Compile Include="Assets\Scripts\AbandonAttempt.cs" />
+    <Compile Include="Assets\Scripts\BackToMainMenu.cs" />
     <Compile Include="Assets\Scripts\CarSpawner.cs" />
     <Compile Include="Assets\Scripts\ValidationOfInput.cs" />
     <Compile Include="Assets\Scripts\TimerUI.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Assets\Scripts\PathScript.cs" />
     <Compile Include="Assets\Scripts\AmountCollector.cs" />
     <Compile Include="Assets\Scripts\SliderText.cs" />
-    <Compile Include="Assets\Scripts\BackToMainMenu.cs" />
+    <Compile Include="Assets\Scripts\ValueSetter.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -3901,7 +3901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   realisticSUT: 0
   generator: {fileID: 0}
-  GreenLightTime: 45
+  GreenLightTime: 10
   YellowLightTime: 2
   TBlockTime: 2
   delayOne: 0
@@ -3937,6 +3937,18 @@ MonoBehaviour:
   lightGreen2_2: {fileID: 5824388811045198958, guid: 5445c710dfd1f5a4ebc9dba7a0e4992f, type: 3}
   lightGreen1_1: {fileID: 2766000351365882633, guid: 7af22183d82b2f8409a1db334b078001, type: 3}
   lightGreen1_2: {fileID: 2751151794829768065, guid: 6579b42ae8c0535439fc3489c51f08c5, type: 3}
+  lightRedYellow3_1: {fileID: 2766000351365882633, guid: b8bde6f0309851c4a90c24d5134bf359, type: 3}
+  lightRedYellow3_2: {fileID: 2766000351365882633, guid: de772967a920ca94d8be49646d58a32b, type: 3}
+  lightRedYellow2_1: {fileID: 2766000351365882633, guid: 8f99cde44c36d5f4ba8132b73ad0730e, type: 3}
+  lightRedYellow2_2: {fileID: 2766000351365882633, guid: 3d3372be144971841ae9e4ce4ff8bad9, type: 3}
+  lightRedYellow1_1: {fileID: 2766000351365882633, guid: 31be9a197f2e88f46877877216c1f1b3, type: 3}
+  lightRedYellow1_2: {fileID: 2766000351365882633, guid: 38378814c688951429415f08ceff289e, type: 3}
+  current3_1: {fileID: 0}
+  current3_2: {fileID: 0}
+  current2_1: {fileID: 0}
+  current2_2: {fileID: 0}
+  current1_1: {fileID: 0}
+  current1_2: {fileID: 0}
 --- !u!4 &1036123272
 Transform:
   m_ObjectHideFlags: 0

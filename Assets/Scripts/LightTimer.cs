@@ -169,7 +169,7 @@ public class LightTimer : MonoBehaviour
                 redFlag = false;
                 yellowFlag = true;
                 wasGreen = false;
-                TryToEnableCollider(false);
+                TryToEnableCollider(true);
                 timer = yellow;
                 return;
             }

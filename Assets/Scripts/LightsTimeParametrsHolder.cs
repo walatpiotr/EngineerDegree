@@ -41,12 +41,19 @@ public class LightsTimeParametrsHolder : MonoBehaviour
     public GameObject lightGreen1_1;
     public GameObject lightGreen1_2;
 
-    private GameObject current3_1;
-    private GameObject current3_2;
-    private GameObject current2_1;
-    private GameObject current2_2;
-    private GameObject current1_1;
-    private GameObject current1_2;
+    public GameObject lightRedYellow3_1;
+    public GameObject lightRedYellow3_2;
+    public GameObject lightRedYellow2_1;
+    public GameObject lightRedYellow2_2;
+    public GameObject lightRedYellow1_1;
+    public GameObject lightRedYellow1_2;
+
+    public GameObject current3_1;
+    public GameObject current3_2;
+    public GameObject current2_1;
+    public GameObject current2_2;
+    public GameObject current1_1;
+    public GameObject current1_2;
 
     private bool greenFlag1 = false;
     private bool yellowFlag1 = true;
@@ -167,10 +174,12 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             }
             if (redFlag1) // Red to yellow
             {
+                Debug.Log("1 - redToYellow - upper");
+
                 redFlag1 = false;
                 yellowFlag1 = true;
                 wasGreen1 = false;
-                AssignProperLightTotimer(timer1, "yellow");
+                AssignProperLightTotimer(timer1, "redYellow");
                 DestroyPrevious(timer1);
                 InstantiateProperLights(timer1);
                 timer1 = YellowLightTime;
@@ -221,10 +230,12 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             }
             if (redFlag2) // Red to yellow
             {
+                Debug.Log("2 - redToYellow - upper");
+
                 redFlag2 = false;
                 yellowFlag2 = true;
                 wasGreen2 = false;
-                AssignProperLightTotimer(timer2, "yellow");
+                AssignProperLightTotimer(timer2, "redYellow");
                 DestroyPrevious(timer2);
                 InstantiateProperLights(timer2);
                 timer2 = YellowLightTime;
@@ -276,10 +287,11 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             }
             if (redFlag3) // Red to yellow
             {
+                Debug.Log("3 - redToYellow - upper");
                 redFlag3 = false;
                 yellowFlag3 = true;
                 wasGreen3 = false;
-                AssignProperLightTotimer(timer3, "yellow");
+                AssignProperLightTotimer(timer3, "redYellow");
                 DestroyPrevious(timer3);
                 InstantiateProperLights(timer3);
                 timer3 = YellowLightTime;
@@ -349,6 +361,25 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             {
                 current3_1 = lightGreen3_1;
                 current3_2 = lightGreen3_2;
+            }
+        }
+        if (name == "redYellow")
+        {
+            Debug.Log("redToYellow");
+            if (timer == timer1)
+            {
+                current1_1 = lightRedYellow1_1;
+                current1_2 = lightRedYellow1_2;
+            }
+            if (timer == timer2)
+            {
+                current2_1 = lightRedYellow2_1;
+                current2_2 = lightRedYellow2_2;
+            }
+            if (timer == timer3)
+            {
+                current3_1 = lightRedYellow3_1;
+                current3_2 = lightRedYellow3_2;
             }
         }
     }

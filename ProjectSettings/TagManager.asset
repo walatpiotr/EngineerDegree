@@ -33,6 +33,11 @@ TagManager:
   - buttonSUT
   - buttonNonSUT
   - animator
+  - sliderMinutes
+  - sliderVehicles
+  - sliderGreen
+  - sliderYellow
+  - sliderTBlock
   layers:
   - Default
   - TransparentFX

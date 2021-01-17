@@ -30,10 +30,4 @@ public class ValueCollector : MonoBehaviour
         globalParamters.time = valuesFromMenu.minutes * 60;
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
