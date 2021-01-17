@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LightsTimeParametrsHolder : MonoBehaviour
 {
@@ -56,19 +57,19 @@ public class LightsTimeParametrsHolder : MonoBehaviour
     public GameObject current1_2;
 
     private bool greenFlag1 = false;
-    private bool yellowFlag1 = true;
-    private bool redFlag1 = false;
-    private bool wasGreen1 = false;
+    private bool yellowFlag1 = false;
+    private bool redFlag1 = true;
+    private bool wasGreen1 = true;
 
     private bool greenFlag2 = false;
-    private bool yellowFlag2 = true;
-    private bool redFlag2 = false;
-    private bool wasGreen2 = false;
+    private bool yellowFlag2 = false;
+    private bool redFlag2 = true;
+    private bool wasGreen2 = true;
 
     private bool greenFlag3 = false;
-    private bool yellowFlag3 = true;
-    private bool redFlag3 = false;
-    private bool wasGreen3 = false;
+    private bool yellowFlag3 = false;
+    private bool redFlag3 = true;
+    private bool wasGreen3 = true;
 
     private float RedLightTime;
 
@@ -79,13 +80,22 @@ public class LightsTimeParametrsHolder : MonoBehaviour
     private GameObject currentForDestroy1_1;
     private GameObject currentForDestroy1_2;
 
+    public Image timer1Image;
+    public Image timer2Image;
+    public Image timer3Image;
+
+    public Sprite Red;
+    public Sprite Yellow;
+    public Sprite Green;
+    public Sprite RedYellow;
+
     // Start is called before the first frame update
     void Start()
     {
         SpawnAllRedLights();
 
-        delayOne = YellowLightTime + GreenLightTime + YellowLightTime + TBlockTime;
-        delayTwo = delayOne * 2;
+        delayOne = YellowLightTime + GreenLightTime + TBlockTime;
+        delayTwo = delayOne * 2 + YellowLightTime;
 
         timer3 = 0f;
         timer1 = delayTwo;
@@ -144,6 +154,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer1, "yellow");
                 DestroyPrevious(timer1);
                 InstantiateProperLights(timer1);
+                UISetUp(timer1, "yellow");
                 timer1 = YellowLightTime;
                 return;
             }
@@ -157,6 +168,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer1, "red");
                     DestroyPrevious(timer1);
                     InstantiateProperLights(timer1);
+                    UISetUp(timer1, "red");
                     timer1 = RedLightTime;
                     return;
                 }
@@ -168,6 +180,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer1, "green");
                     DestroyPrevious(timer1);
                     InstantiateProperLights(timer1);
+                    UISetUp(timer1, "green");
                     timer1 = GreenLightTime;
                     return;
                 }
@@ -182,6 +195,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer1, "redYellow");
                 DestroyPrevious(timer1);
                 InstantiateProperLights(timer1);
+                UISetUp(timer1, "redYellow");
                 timer1 = YellowLightTime;
                 return;
             }
@@ -200,6 +214,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer2, "yellow");
                 DestroyPrevious(timer2);
                 InstantiateProperLights(timer2);
+                UISetUp(timer2, "yellow");
                 timer2 = YellowLightTime;
                 return;
             }
@@ -213,6 +228,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer2, "red");
                     DestroyPrevious(timer2);
                     InstantiateProperLights(timer2);
+                    UISetUp(timer2, "red");
                     timer2 = RedLightTime;
                     return;
                 }
@@ -224,6 +240,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer2, "green");
                     DestroyPrevious(timer2);
                     InstantiateProperLights(timer2);
+                    UISetUp(timer2, "green");
                     timer2 = GreenLightTime;
                     return;
                 }
@@ -238,6 +255,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer2, "redYellow");
                 DestroyPrevious(timer2);
                 InstantiateProperLights(timer2);
+                UISetUp(timer2, "redYellow");
                 timer2 = YellowLightTime;
                 return;
             }
@@ -256,6 +274,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer3, "yellow");
                 DestroyPrevious(timer3);
                 InstantiateProperLights(timer3);
+                UISetUp(timer3, "yellow");
                 timer3 = YellowLightTime;
                 return;
             }
@@ -269,6 +288,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer3, "red");
                     DestroyPrevious(timer3);
                     InstantiateProperLights(timer3);
+                    UISetUp(timer3, "red");
                     timer3 = RedLightTime;
                     return;
                 }
@@ -281,6 +301,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                     AssignProperLightTotimer(timer3, "green");
                     DestroyPrevious(timer3);
                     InstantiateProperLights(timer3);
+                    UISetUp(timer3, "green");
                     timer3 = GreenLightTime;
                     return;
                 }
@@ -294,6 +315,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
                 AssignProperLightTotimer(timer3, "redYellow");
                 DestroyPrevious(timer3);
                 InstantiateProperLights(timer3);
+                UISetUp(timer3, "redYellow");
                 timer3 = YellowLightTime;
                 return;
             }
@@ -419,6 +441,67 @@ public class LightsTimeParametrsHolder : MonoBehaviour
         {
             Destroy(currentForDestroy3_1);
             Destroy(currentForDestroy3_2);
+        }
+    }
+
+    void UISetUp(float timer, string type)
+    {
+        if (timer == timer1)
+        {
+            if(type == "green")
+            {
+                timer1Image.sprite = Green;
+            }
+            if (type == "yellow")
+            {
+                timer1Image.sprite = Yellow;
+            }
+            if (type == "red")
+            {
+                timer1Image.sprite = Red;
+            }
+            if (type == "redYellow")
+            {
+                timer1Image.sprite = RedYellow;
+            }
+        }
+        if (timer == timer2)
+        {
+            if (type == "green")
+            {
+                timer2Image.sprite = Green;
+            }
+            if (type == "yellow")
+            {
+                timer2Image.sprite = Yellow;
+            }
+            if (type == "red")
+            {
+                timer2Image.sprite = Red;
+            }
+            if (type == "redYellow")
+            {
+                timer2Image.sprite = RedYellow;
+            }
+        }
+        if (timer == timer3)
+        {
+            if (type == "green")
+            {
+                timer3Image.sprite = Green;
+            }
+            if (type == "yellow")
+            {
+                timer3Image.sprite = Yellow;
+            }
+            if (type == "red")
+            {
+                timer3Image.sprite = Red;
+            }
+            if (type == "redYellow")
+            {
+                timer3Image.sprite = RedYellow;
+            }
         }
     }
 }

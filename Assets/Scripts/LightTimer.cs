@@ -26,10 +26,10 @@ public class LightTimer : MonoBehaviour
     public List<string> tagsOfCars;
 
     private bool greenFlag = false;
-    private bool yellowFlag = true;
-    private bool redFlag = false;
+    private bool yellowFlag = false;
+    private bool redFlag = true;
 
-    private bool wasGreen = false;
+    private bool wasGreen = true;
 
     public float timer = 0f;
 
@@ -107,11 +107,11 @@ public class LightTimer : MonoBehaviour
     {
         if (number == 1)
         {
-            delay = yellow + green + yellow + tBlock;
+            delay = yellow + green + tBlock;
         }
         else if (number == 2)
         {
-            delay = 2 * (yellow + green + yellow + tBlock);
+            delay = 2 * (yellow + green + tBlock) + yellow;
         }
         else if (number == 3)
         {
