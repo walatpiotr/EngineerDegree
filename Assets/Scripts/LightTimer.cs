@@ -182,6 +182,7 @@ public class LightTimer : MonoBehaviour
         {
             tryingToEnable = false;
 
+            renderer.enabled = false;
             collider.enabled = false;
 
             //Debug.Log("starting all cars");
@@ -191,7 +192,7 @@ public class LightTimer : MonoBehaviour
             tryingToEnable = false;
 
             var transform = this.GetComponent<Transform>();
-            Collider[] colliders = Physics.OverlapSphere(transform.position, 3.0f);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 1.5f);
 
             foreach (var collider in colliders)
             {
@@ -206,6 +207,7 @@ public class LightTimer : MonoBehaviour
             }
             if(!tryingToEnable)
             {
+                renderer.enabled = true;
 
                 collider.enabled = true;
             }

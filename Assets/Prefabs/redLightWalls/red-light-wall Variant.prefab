@@ -23,8 +23,12 @@ MonoBehaviour:
   numberOfPath: 0600000007000000
   carsInMyPath: []
   tagsOfCars: []
+  timer: 0
+  firstSUTValue: 0
+  secondSUTValue: 0
   carSpawner: {fileID: 0}
   tryingToEnable: 0
+  startingToSetup: 0
 --- !u!1001 &6412474718043643225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34,7 +38,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7863168582202282481, guid: 3289a3067d302f1439c5cb0a062db695, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.59
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 7863168582202282481, guid: 3289a3067d302f1439c5cb0a062db695, type: 3}
       propertyPath: m_LocalPosition.y
@@ -42,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7863168582202282481, guid: 3289a3067d302f1439c5cb0a062db695, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.44
+      value: 1.146
       objectReference: {fileID: 0}
     - target: {fileID: 7863168582202282481, guid: 3289a3067d302f1439c5cb0a062db695, type: 3}
       propertyPath: m_LocalRotation.x

@@ -52,6 +52,7 @@ public class CarEngine : MonoBehaviour
 
     public bool cantBrake = false;
 
+    public float distanceToWall;
     private float angle = 1f;
     // Start is called before the first frame update
     void Start()
@@ -62,9 +63,17 @@ public class CarEngine : MonoBehaviour
 
         this.tag = spawner.carTags[pathNumber];
         this.transform.Find("Body").tag = spawner.carTags[pathNumber];
-        
+
         //maxWheelTorque = 80f;
-       // maxBreakTorque = 150f;
+        // maxBreakTorque = 150f;
+        if (typeOfCar == "big")
+        {
+            distanceToWall = 1.5f;
+        }
+        else
+        {
+            distanceToWall = 1f;
+        }
     }
 
     // Update is called once per frame
@@ -135,7 +144,7 @@ public class CarEngine : MonoBehaviour
             var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 20;
 
 
-            if (hit.distance < distanceToMeasure)
+            if (hit.distance < distanceToMeasure && hit.distance > 2f)
             {
                 foreach (string car in carTagsToAvoid)
                 {
@@ -158,7 +167,7 @@ public class CarEngine : MonoBehaviour
                     isBraking = true;
                 }
             }
-            else if ((hit.distance < 2f))
+            else if ((hit.distance <= 2f))
             {
                 foreach (string car in carTagsToAvoid)
                 {
@@ -176,13 +185,13 @@ public class CarEngine : MonoBehaviour
                 {
                     isBraking = false;
                 }
-            }
-            else if ((hit.distance < 1f) && (hit.collider.tag == wallTagToAvoid))
-            {
-                firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
-                secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
-                CarShouldStay = true;
-                isBraking = true;
+                if ((hit.distance <= distanceToWall) && (hit.collider.tag == wallTagToAvoid))
+                {
+                    firstValue = hit.transform.gameObject.GetComponent<LightTimer>().firstSUTValue;
+                    secondValue = hit.transform.gameObject.GetComponent<LightTimer>().secondSUTValue;
+                    CarShouldStay = true;
+                    isBraking = true;
+                }
             }
             else
             {
