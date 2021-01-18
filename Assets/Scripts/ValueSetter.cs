@@ -12,6 +12,7 @@ public class ValueSetter : MonoBehaviour
     public Slider green;
     public Slider yellow;
     public Slider tBlock;
+    public Slider generator;
 
 
     void Awake()
@@ -25,6 +26,7 @@ public class ValueSetter : MonoBehaviour
         green.value = valuesFromMenu.greenLightSeconds;
         yellow.value = valuesFromMenu.yellowLightSeconds;
         tBlock.value = valuesFromMenu.tBlockTimeSeconds;
+        generator.value = valuesFromMenu.generatorFrequency;
 
     }
 }

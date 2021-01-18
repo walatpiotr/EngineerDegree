@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - AmountCollector
     - BackToMainMenu
+    - CarAmountViewer
     - CarEngine
     - CarSpawner
     - FreeFlyCamera
@@ -18,6 +19,7 @@ ScriptsOnlyBuild:
     - ValueCollector
     - ValueGathering
     - ValueHolderScript
+    - ValueSetter
     Unity.CollabProxy.Editor.dll:
     - Unity.Cloud.Collaborate.UserInterface.CollaborateWindow
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
@@ -32,10 +34,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -89,31 +89,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12058}
     - Class: 114
-      Script: {instanceID: 12496}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 12510}
+      Script: {instanceID: 12498}
     - Class: 114
-      Script: {instanceID: 12530}
+      Script: {instanceID: 12512}
     - Class: 114
-      Script: {instanceID: 12756}
+      Script: {instanceID: 12532}
     - Class: 114
-      Script: {instanceID: 12964}
+      Script: {instanceID: 12758}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 12968}
     - Class: 114
-      Script: {instanceID: 13228}
+      Script: {instanceID: 13216}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13232}
     - Class: 114
-      Script: {instanceID: 13502}
+      Script: {instanceID: 13438}
     - Class: 114
-      Script: {instanceID: 13678}
+      Script: {instanceID: 13506}
     - Class: 114
-      Script: {instanceID: 13898}
+      Script: {instanceID: 13682}
     - Class: 114
-      Script: {instanceID: 13946}
+      Script: {instanceID: 13902}
     - Class: 114
-      Script: {instanceID: 13960}
+      Script: {instanceID: 13950}
+    - Class: 114
+      Script: {instanceID: 13964}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -182,31 +184,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12058}
     - Class: 114
-      Script: {instanceID: 12432}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12496}
+      Script: {instanceID: 12498}
     - Class: 114
-      Script: {instanceID: 12536}
+      Script: {instanceID: 12538}
     - Class: 114
-      Script: {instanceID: 13158}
+      Script: {instanceID: 12912}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 13162}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13216}
     - Class: 114
-      Script: {instanceID: 13502}
+      Script: {instanceID: 13438}
     - Class: 114
-      Script: {instanceID: 13538}
+      Script: {instanceID: 13506}
     - Class: 114
       Script: {instanceID: 13542}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13546}
     - Class: 114
-      Script: {instanceID: 13820}
+      Script: {instanceID: 13662}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 13824}
     - Class: 114
-      Script: {instanceID: 13898}
+      Script: {instanceID: 13890}
+    - Class: 114
+      Script: {instanceID: 13902}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -220,6 +224,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -281,31 +287,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12254}
     - Class: 114
-      Script: {instanceID: 12432}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12496}
+      Script: {instanceID: 12498}
     - Class: 114
-      Script: {instanceID: 12536}
+      Script: {instanceID: 12538}
     - Class: 114
-      Script: {instanceID: 13158}
+      Script: {instanceID: 12912}
     - Class: 114
-      Script: {instanceID: 13212}
+      Script: {instanceID: 13162}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13216}
     - Class: 114
-      Script: {instanceID: 13502}
+      Script: {instanceID: 13438}
     - Class: 114
-      Script: {instanceID: 13538}
+      Script: {instanceID: 13506}
     - Class: 114
       Script: {instanceID: 13542}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13546}
     - Class: 114
-      Script: {instanceID: 13820}
+      Script: {instanceID: 13662}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 13824}
     - Class: 114
-      Script: {instanceID: 13898}
+      Script: {instanceID: 13890}
+    - Class: 114
+      Script: {instanceID: 13902}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -319,6 +327,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
       Script: {instanceID: 0}
     - Class: 222
       Script: {instanceID: 0}
@@ -367,7 +377,7 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 398d69e21286edca48e862288a2024f1
+      Hash: 328c62d88a1e902cb160cb5de733eb4a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ValueGathering
@@ -523,13 +533,19 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: c81b65f7d382e570bab07b69cd90c3c6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ValueSetter
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 6fbabc5c0cf32d949684fe156c081e4b
+      Hash: 34109989fde573e1fffe826a71bbc369
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CarEngine
@@ -547,7 +563,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: f7a661887df1e18fe0857b0e2ac1e015
+      Hash: 08503781a9a61e272ff9f702310c343a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ValueHolderScript
@@ -619,6 +635,12 @@ ScriptsOnlyBuild:
     className: RemoteTestResultSender
   - hash:
       serializedVersion: 2
+      Hash: d8b26561c7428a764752f587cb52dd61
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CarAmountViewer
+  - hash:
+      serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -643,7 +665,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: c9539153cb1f8bbb34e005d86f2a17fd
+      Hash: 6ad8dfb92abaebcc96ebfce7b00e8862
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LightsTimeParametrsHolder
@@ -881,10 +903,16 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ff2c80745d71125deef5f6c46c67cee6
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: InitValue
   platform: 5
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/SimulationSUT.unity
   - Assets/Scenes/SimulationNonSUT.unity
-  playerPath: "C:/Users/Piotrek/Documents/Walat_PI/EngineerDegree/Build_V_1_3/Walat
+  playerPath: "C:/Users/Piotrek/Documents/Walat_PI/EngineerDegree/Build_v_1_5/Walat
     Praca In\u017Cynierska.exe"

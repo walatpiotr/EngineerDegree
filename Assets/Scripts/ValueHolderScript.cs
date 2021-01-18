@@ -7,6 +7,7 @@ public class ValueHolderScript : MonoBehaviour
     public int greenLightSeconds;
     public int yellowLightSeconds;
     public int tBlockTimeSeconds;
+    public int generatorFrequency;
 
     public int amountOfCars;
     public int previouseSceneIndex;

@@ -26,7 +26,7 @@ public class ValueCollector : MonoBehaviour
         lightsParameters.TBlockTime = valuesFromMenu.tBlockTimeSeconds;
 
         spawnerParameters.percentageOfBigCars = valuesFromMenu.percentageOfBigCars;
-
+        spawnerParameters.spawnTime = 60f / (float)valuesFromMenu.generatorFrequency;
         globalParamters.time = valuesFromMenu.minutes * 60;
 
     }

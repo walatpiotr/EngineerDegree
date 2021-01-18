@@ -11,7 +11,7 @@ public class CarSpawner : MonoBehaviour
     public GameObject smallCar;
     public GameObject bigCar;
     public List<GameObject> paths;
-    public float spawnTime = 0.1f;
+    public float spawnTime;
     public Dictionary<int, List<GameObject>> carsInPaths = new Dictionary<int, List<GameObject>> { };
     public Dictionary<int, List<GameObject>> nodesInPaths = new Dictionary<int, List<GameObject>> { };
 

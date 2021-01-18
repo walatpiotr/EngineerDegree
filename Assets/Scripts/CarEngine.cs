@@ -141,7 +141,7 @@ public class CarEngine : MonoBehaviour
 
         if (raycast1)
         {
-            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 20;
+            var distanceToMeasure = 2 * Mathf.PI * wheelFL.radius * wheelFL.rpm / 16;
 
 
             if (hit.distance < distanceToMeasure && hit.distance > 2f)

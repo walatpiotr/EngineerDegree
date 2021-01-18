@@ -11,6 +11,7 @@ public class ValueGathering : MonoBehaviour
     public TextMeshProUGUI greenInput;
     public TextMeshProUGUI yellowInput;
     public TextMeshProUGUI tBlockInput;
+    public TextMeshProUGUI generatorInput;
 
     public GameObject valueHolder;
 
@@ -27,6 +28,8 @@ public class ValueGathering : MonoBehaviour
         values.yellowLightSeconds = System.Convert.ToInt32(yellowInput.text);
         
         values.tBlockTimeSeconds = System.Convert.ToInt32(tBlockInput.text);
+
+        values.generatorFrequency = System.Convert.ToInt32(generatorInput.text);
         
     }
 }
