@@ -109,12 +109,12 @@ public class CarEngine : MonoBehaviour
         {
             if (realisticSUT)
             {
-                Debug.Log("CarShouldStay");
+                //Debug.Log("CarShouldStay");
 
                 SetOperationalTimer();
                 StartCounting = true;
                 CarShouldStay = false;
-                Debug.Log("CarShouldStay:" + CarShouldStay);
+                //Debug.Log("CarShouldStay:" + CarShouldStay);
             }
             else
             {
@@ -158,7 +158,7 @@ public class CarEngine : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("XXX");
+                        //Debug.Log("XXX");
                         isBraking = false;
                     }
                 }
@@ -200,7 +200,7 @@ public class CarEngine : MonoBehaviour
         }
         else
         {
-            Debug.Log("I am free!" + this);
+            //Debug.Log("I am free!" + this);
             isBraking = false;
         }
     }
@@ -291,6 +291,6 @@ public class CarEngine : MonoBehaviour
         {
             operationalTimer = 0f;
         }
-        Debug.Log("Set LWTSC to "+ CarShouldStay + " so it should set operationalTimer " + operationalTimer);
+        //Debug.Log("Set LWTSC to "+ CarShouldStay + " so it should set operationalTimer " + operationalTimer);
     }
 }

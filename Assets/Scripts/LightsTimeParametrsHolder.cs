@@ -187,7 +187,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             }
             if (redFlag1) // Red to yellow
             {
-                Debug.Log("1 - redToYellow - upper");
+                //Debug.Log("1 - redToYellow - upper");
 
                 redFlag1 = false;
                 yellowFlag1 = true;
@@ -247,7 +247,7 @@ public class LightsTimeParametrsHolder : MonoBehaviour
             }
             if (redFlag2) // Red to yellow
             {
-                Debug.Log("2 - redToYellow - upper");
+                //Debug.Log("2 - redToYellow - upper");
 
                 redFlag2 = false;
                 yellowFlag2 = true;

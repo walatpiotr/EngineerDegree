@@ -70,6 +70,7 @@ public class SUTGeneration : MonoBehaviour
         
         if (randomValue >= situationCapValues[2])
         {
+            Debug.Log("ss");
             return situations[3];
         }
         if (randomValue >= situationCapValues[1])
@@ -90,12 +91,12 @@ public class SUTGeneration : MonoBehaviour
 
     private List<float> SetUpProperSUTToSituation(bool firstFast, bool secondFast)
     {
-        var results = Generation(firstFast, secondFast);
+        var results = new List<float> { 0.2f, 0.2f };
         while(results.Sum(x => x) > maxSecond2 || results.Sum(x => x) < 1.16f)
         {
             results = Generation(firstFast, secondFast);
         }
-
+        Debug.Log(results[0] + " : " + results[1]);
         return results;
     }
 

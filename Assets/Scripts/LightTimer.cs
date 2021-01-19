@@ -256,7 +256,7 @@ public class LightTimer : MonoBehaviour
     void SetUpLocalSUTProperties()
     {
         carsInMyPath.Sort(CompareCarsByDistance);
-        Debug.Log("Generating");
+        //Debug.Log("Generating");
         var SUTs = generator.SetUpValuesForFirstTwoCars();
         firstSUTValue = SUTs[0];
         secondSUTValue = SUTs[1];
